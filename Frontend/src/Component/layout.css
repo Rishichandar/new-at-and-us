@@ -27,20 +27,22 @@
 
 
 #firstImg{
-  width: 450px;
-  height: 350px;
+  width: 470px;
+  height: 370px;
   position: relative;
-  bottom: 30px;
+  bottom: 50px;
 }
 #secondImg{
-  width: 450px;
-  height: 350px;
+  width: 430px;
+  height: 330px;
   position: relative;
   bottom: 30px;
+  left: 30px;
 }
 #thirdImg{
-  width: 450px;
-  height: 350px;
+  width: 430px;
+  height: 300px;
   position: relative;
-  bottom: 30px;
+  bottom: 25px;
+  
 }

@@ -205,7 +205,7 @@ const Sidebar1 = () => {
                   </button>
                 </Link>
                 {roleid === 1 && (
-                  <Link to="/pendingapprovel" style={{ textDecoration: "none" }} className="material-symbols-outlined">
+                  <Link to="/pendingapproval" style={{ textDecoration: "none" }} className="material-symbols-outlined">
                     <button type="button" id="nav-button">
                       {/* <span>
                         <FaHourglassHalf />

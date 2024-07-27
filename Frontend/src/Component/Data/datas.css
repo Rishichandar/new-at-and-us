@@ -5,12 +5,14 @@
   max-height: 320px;
   overflow: auto; /* Enable scrolling for overflow content */
   margin: auto; /* Center the table horizontally */
+ 
 }
 
 .admincon table {
   width: 90%; /* Make the table fill the container */
   border-collapse: collapse; /* Collapse table borders */
   margin-left: 115px;
+  
  
 
 }
@@ -23,11 +25,11 @@
   padding: 10px;
   /* padding-left: 20px; Add padding to table cells */
   text-align: left; /* Center-align text */
-  border: 1px solid black; /* Add black border */
+  border: 1px solid rgb(114, 110, 110); /* Add black border */
 }
 
 .admincon th {
-  background-color: #6e92aa;
+  background-color: #8DA399;
   position: sticky;
 
   top: 0;
@@ -49,7 +51,7 @@
   width: 60px;
   transition: all 250ms;
   font-family: sans-serif;
-  background-color: #38d845;
+  background-color: #4ec756;
   margin-bottom: 15px;
   border: 1px groove;
   border-color: transparent;
@@ -64,12 +66,12 @@
   width: 60px;
   transition: all 250ms;
   font-family: sans-serif;
-  background-color: #4c504c;
+  background-color: rgb(112, 134, 165);
   border: 1px groove;
   border-color: transparent;
   color: rgb(247, 239, 239);
   position: relative;
-  left: 250px;
+  left: 230px;
   border-radius: 5px;
 }
 
@@ -77,27 +79,34 @@
   border-radius: 10px;
 }
 
-.marquee {
+
+.marquee-container {
+  position: fixed;
+  bottom: 40px;
+  left: 150px;
   width: 100%;
-  overflow: hidden;
+  padding: 10px 0; /* Adjust padding as needed */
+  z-index: 1000; /* Ensures it stays above other elements */
+  overflow: hidden; /* Ensures the scrolling text stays within the container */
+}
+
+.marquee-text {
+  display: inline-block;
   white-space: nowrap;
-  box-sizing: border-box;
   color: red;
-  font-family: "calibri";
-  font-weight: bold;
-  font-size: 17px;
-  margin-top: 25px;
+  animation: marquee 9s linear infinite; /* Adjust the duration as needed */
 }
 
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
+  from {
+    transform: translateX(100%);
   }
-  100% {
+  to {
     transform: translateX(-100%);
   }
 }
 
-.highlighted-text {
-  color: blue;
+#Back{
+  position: absolute;
+  bottom: 100px;
 }

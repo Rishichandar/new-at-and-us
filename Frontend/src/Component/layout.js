@@ -4,15 +4,15 @@
 
 import React, { useState } from "react";
 import "./layout.css";
-import img from "./Am.png";
+import img from "./rem.png";
 import { Box, Button, keyframes } from "@mui/material";
 import api from "../HTTPHandler/axiosConfig";
 import Timer from "../CommonComponenets/TimerComponent/timer";
 import { useDispatch, useSelector } from "react-redux";
 import { manageTimer } from "../Redux/timerSlice/ManageTimer";
 import { endTimer } from "../Redux/timerSlice/TimerSlice";
-import breakImg from "./rbreak.jpg";
-import lunch from "./rlunch.jpg";
+import breakImg from "./coff.png";
+import lunch from "./eat.png";
 import { toggleBreak, toggleLunch } from "../Redux/ctrlMngntSilce/breakManagementSlice";
 import { toast } from "react-toastify";
 import { Welcomemsg } from "./welcomemsg";
@@ -228,7 +228,7 @@ const Layout = () => {
               justifyContent={"space-evenly"}
               sx={{
                 position:'relative',
-                bottom:'40px',
+                bottom:'50px',
                 boxShadow: "0px 0px 10px #aaa",
                 "&:hover": {
                   boxShadow: "2px 2px 20px #27ABCC",

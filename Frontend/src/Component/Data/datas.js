@@ -196,24 +196,24 @@ const Datas = () => {
         <div className="search-container" style={{ width: "100%", textAlign: "center" }}>
           {/* <div className="date" style={{ width: "100%", height: "50px"}}> */}
           <div className="date" style={{ width: "100%", height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <p style={{ position:'relative',left:'50px'}}> Start date <span className="required">*</span> :</p> 
+            <p style={{ position: 'relative', left: '50px' }}> Start date <span className="required">*</span> :</p>
             <input
               type="date"
               onChange={handleStartDateChange}
-              style={{ width: "145px", height: "30px", paddingLeft: "10px", position:'relative',left:'60px' }}
+              style={{ width: "145px", height: "30px", paddingLeft: "10px", position: 'relative', left: '60px' }}
             />
-            <p style={{ position:'relative',left:'100px'}}> End Date <span className="required">*</span> :</p> 
+            <p style={{ position: 'relative', left: '100px' }}> End Date <span className="required">*</span> :</p>
             <input
               type="date"
               onChange={handleEndDateChange}
-              style={{ width: "145px", height: "30px", paddingLeft: "10px", position:'relative',left:'120px' }}
+              style={{ width: "145px", height: "30px", paddingLeft: "10px", position: 'relative', left: '120px' }}
             />
             {data.RoleId === 1 ? (
               <>
                 <select
                   value={searchEmail}
                   onChange={handleEmailChange}
-                  style={{ width: "200px", height: "30px", paddingLeft: "10px", position:'relative',left:'180px' }}
+                  style={{ width: "200px", height: "30px", paddingLeft: "10px", position: 'relative', left: '180px' }}
                 >
                   <option value="">Select Email</option>
                   {emailList.length > 0 ? (
@@ -307,14 +307,14 @@ const Datas = () => {
             </table>
           </div>
         </div>
-        <div className="marquee">
-          <marquee>
+        <div className="marquee-container">
+          <div className="marquee-text">
             Any violation will be treated as a security incident and referred to HR for appropriate disciplinary action
-          </marquee>
+          </div>
         </div>
         <div className="containerback" style={{ textAlign: "center", marginTop: "17px" }}>
           <NavLink to="/main" style={{ textDecoration: "none" }}>
-            <Button variant="contained" color="primary" style={{ marginRight: "10px" }}>
+            <Button variant="contained" color="primary" style={{ marginRight: "10px" }} id="Back">
               Back
             </Button>
           </NavLink>

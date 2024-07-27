@@ -1,0 +1,36 @@
+.pending-table {
+    position: absolute;
+    top: 150px;
+    left: 240px;
+    max-width: 75%;
+    max-height:700px;
+    overflow: auto;
+    width: 1230px;
+    margin: auto; 
+  }
+  
+  /* .pending-table table {
+    border-collapse: collapse;
+    margin-left: 80px;
+    width: 90%;
+    margin-top: 0px;
+  } */
+
+  .pending-table th,
+.pending-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid rgb(114, 110, 110);
+}
+
+.pending-table th {
+  background-color: #8DA399;
+  position: sticky;
+  top: 0; 
+  z-index: 2;
+}
+#pend{
+    position: relative;
+    bottom: 0px;
+    
+}

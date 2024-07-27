@@ -199,10 +199,13 @@ export const Pendingapprovel = () => {
     }
   };
 
-  return (<div className="permissions-table">
+  return (
+    
+  <div className="pending-table">
+     <span id="pend">Pending Approval</span>
     {/* <h2>Pending Approval Page</h2> */}
     <div className="table-container">
-    <h2>Pending Approval Page</h2>
+   
       <table>
         <thead>
           <tr>

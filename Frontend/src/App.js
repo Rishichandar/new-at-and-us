@@ -279,6 +279,7 @@ import "./Usecase/Allpages/taskdetails.css";
 import { Home } from "./Usecase/Allpages/home.jsx";
 import Usecase from "./Usecase/Allpages/Usecase.js";
 import "./Usecase/Allpages/usecase.css";
+import "./pages/permission/pendingapproval.css"
 import { UsecaseReadEdit } from "./Usecase/Allpages/usecaseReadEdit.js";
 import "./Usecase/Allpages/usecaseReadEdit.css";
 import { ProtectedRoute } from "./CommonComponenets/ProtectedRoute/protectedRoute.jsx";
@@ -362,7 +363,7 @@ function App() {
               }
             />
             <Route
-              path="/pendingapprovel"
+              path="/pendingapproval"
               element={
                 <>
                   <Pendingapprovel />

@@ -82,18 +82,18 @@ import React from "react";
 
 export const Welcomemsg = () => {
   // Permanently set the welcome message text
-  const text = "Enhance productivity with our Attendance Management System!";
-
+  // const text = "Enhance productivity with our Attendance Management System!";
+  const text="Reliable Attendance tracking at your fingertips.";
   return (
     <div
       style={{
-        minHeight: "120px",
+        minHeight: "100px",
         display: "flex",
         alignItems: "center",
-        marginLeft: "40px",
+        marginLeft: "45px",
       }}
     >
-      <span style={{fontSize:'1.4rem'}}>{text}</span>
+      <span style={{fontSize:'1.2rem'}}>{text}</span>
     </div>
   );
 };
