@@ -82,10 +82,3 @@ function Titlecontent(){
  
  }
  export default Titlecontent;
-//  Easily assign tasks and prioritize what's most important to your team. Track your team's progress, set project timelines, and manage their work all in one place.
- {/* <p className="tag">In a world of deadlines and deliverables, PMS equips your team to thrive and conquer.</p> */}
-           {/* <BiCheckCircle id="tick1" className="tick"/><p className="info">Efficiently assign and manage resources to tasks and projects.</p>
-          <br></br>
-          <BiCheckCircle id="tick2" className="tick"/><p className="info">Analyze time spent on tasks for accurate project scheduling</p>
-          <br></br>
-          <BiCheckCircle id="tick3" className="tick"/><p  className="info">Organize, share, and store project-related documents securely.</p> */}

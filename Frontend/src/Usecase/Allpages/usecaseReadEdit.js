@@ -212,16 +212,17 @@ export const UsecaseReadEdit = () => {
           Download
         </button>
       )}
+      <div className="table-container">
       <table id="usecase-table">
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Summary</th>
-            <th className="scrollable-cell3">Description</th>
-            <th>Team</th>
-            <th>Status</th>
-            <th>End Date</th>
-            {Roleid !== 1 && <th colSpan="4">Actions</th>}
+            <th id="Th">Title</th>
+            <th id="Th">Summary</th>
+            <th id="Th" className="scrollable-cell3">Description</th>
+            <th id="Th">Team</th>
+            <th id="Th">Status</th>
+            <th id="Th">End Date</th>
+            {Roleid !== 1 && <th colSpan="4" id="Th">Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -383,6 +384,7 @@ export const UsecaseReadEdit = () => {
           )}
         </tbody>
       </table>
+      </div>
       {/* <div className={`toggle-bar ${toggleBarOpen ? "open" : ""}`}>
         <div className="toggle-bar-content">
           <table id="mini1">
@@ -420,10 +422,10 @@ export const UsecaseReadEdit = () => {
             <table id="mini1">
               <thead>
                 <tr>
-                  <th style={{ width: "35%" }}>Usecase</th>
-                  <th style={{ width: "40%" }}>Daily Task</th>
-                  <th style={{ width: "35%" }}>Date</th>
-                  <th style={{ width: "35%" }}>Time</th>
+                  <th id="Th" style={{ width: "35%" }}>Usecase</th>
+                  <th id="Th" style={{ width: "40%" }}>Daily Task</th>
+                  <th id="Th" style={{ width: "35%" }}>Date</th>
+                  <th id="Th" style={{ width: "35%" }}>Time</th>
                 </tr>
               </thead>
               <tbody>

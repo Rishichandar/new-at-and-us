@@ -209,7 +209,7 @@ function User() {
         <br></br>
       </div>
 
-      <div id="tab-user">
+      
         {editMode ? (
           <div id="box">
             <form id="f">
@@ -265,19 +265,20 @@ function User() {
             </form>
           </div>
         ) : (
+          <div id="tab-user">
           <table
-            id="table"
+            className="table"
             style={{ filter: showTab1 ? "blur(0px)" : "blur(20px)" }}
           >
             <thead>
               <tr>
-                <th>Project Title</th>
-                <th>Description</th>
-                <th>Team members</th>
-                <th>Start Date</th>
-                <th>Deadline</th>
-                <th>Tools used</th>
-                <th colSpan={4}>Activity</th>
+                <th id="tth">Project Title</th>
+                <th id="tth">Description</th>
+                <th id="tth">Team members</th>
+                <th id="tth">Start Date</th>
+                <th id="tth">Deadline</th>
+                <th id="tth">Tools used</th>
+                <th id="tth" colSpan={4}>Activity</th>
               </tr>
             </thead>
             <tbody>
@@ -319,8 +320,9 @@ function User() {
               )}
             </tbody>
           </table>
+          </div>
         )}
-      </div>
+      
 
       <div className={`toggle-bar ${toggleBarOpen ? "open" : ""}`}>
         <div className="toggle-bar-content">

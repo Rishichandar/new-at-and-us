@@ -170,10 +170,10 @@ const Sidebar1 = () => {
           <nav> 
             <button type="button" onClick={handleAttendanceManagementClick}>
               <span>
-                <Link to="/main"><RiAdminFill size={15} color="grey" /></Link>
+                <Link to="/main"><RiAdminFill size={15} color="grey" style={{marginRight:'7px',marginTop:'5px'}} /></Link>
               </span>
               <Link to="/main" style={{ textDecoration: "none" }}>
-                <p className="navbar-item" id= "head">Attendance</p>
+                <span className="navbar-item" id= "head">Attendance</span>
               </Link>
             </button>
             {selectedItem === "AttendanceManagement" && (
@@ -182,7 +182,7 @@ const Sidebar1 = () => {
                   <button type="button" id="nav-button">
                     
                   
-                   <p className="navbar-item2"> Time Sheet</p>
+                   <span className="navbar-item2"> Time Sheet</span>
                   </button>
                 </Link>
 
@@ -192,7 +192,7 @@ const Sidebar1 = () => {
                     {/* <span>
                       <FaClipboardList />
                     </span> */}
-                     <p className="navbar-item2">Permission</p>
+                     <span className="navbar-item2">Permission</span>
                   </button>
                 </Link>
                 <Link to="/viewpermission" style={{ textDecoration: "none" }} className="material-symbols-outlined">
@@ -201,7 +201,7 @@ const Sidebar1 = () => {
                       <FaClipboardCheck />
                      </span> */}
                     
-                    <p className="navbar-item2">View Permission</p>
+                    <span className="navbar-item2">View Permission</span>
                   </button>
                 </Link>
                 {roleid === 1 && (
@@ -211,7 +211,7 @@ const Sidebar1 = () => {
                         <FaHourglassHalf />
                       </span> */}
                       
-                      <p className="navbar-item2">Pending Requests</p>
+                      <span className="navbar-item2">Pending Requests</span>
                     </button>
                   </Link>
                 )}
@@ -219,10 +219,10 @@ const Sidebar1 = () => {
             )}
             <button type="button" onClick={handleProjectManagementClick}>
               <span>
-                <Link to="/home"><LiaProjectDiagramSolid size={17} color="grey" /></Link>
+                <Link to="/home"><LiaProjectDiagramSolid size={17} color="grey"style={{marginRight:'7px',marginTop:'5px'}} /></Link>
               </span>
               <Link to="/home" style={{ textDecoration: "none" }}>
-                <p className="navbar-item">Project</p>
+                <span className="navbar-item">Project</span>
               </Link>
             </button>
             {selectedItem === "ProjectManagement" && (
@@ -230,19 +230,15 @@ const Sidebar1 = () => {
                 {roleid === 1 && (
                   <Link to="/admin" style={{ textDecoration: "none" }} className="material-symbols-outlined">
                     <button type="button" id="nav-button">
-                      <span>
-                        <RiAdminFill />
-                      </span>
-                      <p className="navbar-item2">Admin</p>
+                      
+                      <span className="navbar-item3">Admin</span>
                     </button>
                   </Link>
                 )}
                 <Link to="/user" style={{ textDecoration: "none" }} className="material-symbols-outlined">
                   <button type="button" id="nav-button">
-                    <span>
-                      <FaUserCircle />
-                    </span>
-                    <p className="navbar-item2">Details</p>
+                    
+                    <span className="navbar-item3">Details</span>
                   </button>
                 </Link>
               </div>

@@ -288,7 +288,7 @@ import "./pages/permission/permission.css";
 import { Viewpermissions } from "./pages/permission/viewpermission.js";
 import { Pendingapprovel } from "./pages/permission/pendingapprovel.js";
 import image from "./blue.jpg";
-
+import Footer from "./Component/footer/footer.js";
 
 function App() {
   return (
@@ -379,6 +379,7 @@ function App() {
                 <Navbar />
                 <Sidebar1 />
                 <Usecase />
+              
               </>
             }
           />
@@ -389,6 +390,7 @@ function App() {
                 <Navbar />
                 <Sidebar1 />
                 <UsecaseReadEdit />
+                <Footer/>
               </>
             }
           />
@@ -399,6 +401,7 @@ function App() {
                 <Navbar />
                 <Sidebar1 />
                 <Home />
+                <Footer/>
               </>
             }
           />
@@ -409,6 +412,7 @@ function App() {
                 <Navbar />
                 <Sidebar1 />
                 <Admin />
+                <Footer/>
               </>
             }
           />
@@ -419,6 +423,7 @@ function App() {
                 <Navbar />
                 <Sidebar1 />
                 <Projectdetails />
+                <Footer/>
               </>
             }
           />
@@ -429,6 +434,7 @@ function App() {
                 <Navbar />
                 <Sidebar1 />
                 <User />
+                <Footer/>
               </>
             }
           />
@@ -439,6 +445,7 @@ function App() {
                 <Navbar />
                 <Sidebar1 />
                 <Task />
+                <Footer/>
               </>
             }
           />

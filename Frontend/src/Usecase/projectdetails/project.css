@@ -69,13 +69,13 @@
 }
 
 .sidebar {
-  background-color: #1c1d1d;
+  background-color:  #5a8ca8;
   z-index: 500;
   position: fixed;
   overflow: hidden;
   top: 69px;
   right: -670px; /* initially off-screen */
-  height: 92%;
+  height: 84%;
   width: 670px;
   box-shadow: 0 0 10px rgba(12, 12, 12, 0.2);
   transition: right 0.6s ease; /* animate the right property */

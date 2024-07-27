@@ -228,39 +228,32 @@
 /* for back button */
 #back-btn3 {
   position: relative;
-  top: 60px;
-  left: 1180px;
+  top: 20px;
+  left: 1200px;
   width: 70px;
   height: 30px;
   text-align: center;
   bottom: 10px;
 }
 #admin-back-btn {
+  position: relative;
   top: 20px;
-  left: 1180px;
+  left: 1200px;
   width: 70px;
   height: 30px;
   text-align: center;
   bottom: 10px;
 }
-th {
+#Th {
   font-size: 13px;
-  font-weight: 500;
   letter-spacing: 1px;
+  color: white;
 }
 #taskdetails {
   position: relative;
   font-size: larger;
 }
-#usecase-table {
-  width: 1025px;
-  border-collapse: collapse;
-  position: relative;
-  top: 130px;
-  left: 165px;
-  text-align: center;
-  height: 140px;
-}
+
 .task {
   position: relative;
   cursor: pointer;
@@ -403,3 +396,26 @@ th {
   padding: 5px; /* Optional: Adjust padding as needed */
   
 }
+
+
+
+
+
+
+.scrollable-cell3 {
+  max-width: 200px; /* Set a max-width for the scrollable cells */
+  overflow-x: auto; /* Enable horizontal scrolling if content overflows */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+.table-container {
+  max-height: 400px; /* Set the maximum height for the table container */
+  overflow-y: auto; /* Enable vertical scrolling */
+  width: 1025px;
+  border-collapse: collapse;
+  position: relative;
+  top: 100px;
+  left: 100px;
+  text-align: center;
+  height: 200px;
+}
+

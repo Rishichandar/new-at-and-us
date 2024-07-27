@@ -37,27 +37,39 @@
     0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
 }
 
-#table {
+#tab-user {
  width: 1050px;
   border-collapse: collapse;
   position: relative;
-  bottom: 40px;
-  left: 180px;
+  bottom: 100px;
+  left: 230px;
   text-align: center;
-  height: 200px; 
   padding: 1px;
-  overflow-y: auto; /* Changed to overflow-y */
-  position: relative;
+  overflow-y: auto; 
   border-collapse: collapse;
-  max-height:400px;
+  max-height:300px;
   padding: 5px;
 
 }
+/* #table {
+  width: 1050px;
+   border-collapse: collapse;
+   position: relative;
+   bottom: 100px;
+   left: 230px;
+   text-align: center;
+   padding: 1px;
+   overflow-y: auto; 
+   border-collapse: collapse;
+   max-height:300px;
+   padding: 5px;
+ 
+ } */
 
 #box {
   position: absolute;
-  top: 210px;
-  right: 400px;
+  top: 150px;
+  right: 450px;
   width: 400px;
   height: 400px;
   border-radius: 15px;
@@ -244,14 +256,19 @@
 #box button:hover {
   background-color: #3d69c9;
 }
-th {
+#tth {
   color: rgb(255, 255, 255);
-  font-size: 11px;
-  background-color: rgb(120, 152, 179);
+  font-size: 12px;
+  background-color: #8DA399;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 10px;
 }
 td {
   text-align: center;
   font-size: 14px;
+  padding: 9px;
 }
 
 #search-icon1 {
@@ -397,6 +414,7 @@ td {
 .taskadd {
   position: relative;
   cursor: pointer;
+  
 }
 
 .taskadd:hover::after {
@@ -418,7 +436,7 @@ td {
 
 #your-info {
   position: relative;
-  top: 100px;
+  top: 70px;
   left: 185px;
   color: rgb(33, 33, 233);
 }
@@ -429,14 +447,14 @@ td {
 }
 
 .circle {
-  width: 47px; /* Adjust size as needed */
-  height: 47px; /* Adjust size as needed */
-  border-radius: 50%; /* Makes the div a circle */
-  background-color: rgb(19, 230, 54); /* Example background color */
+  width: 47px; 
+  height: 47px; 
+  border-radius: 50%; 
+  background-color: rgb(19, 230, 54); 
   opacity: 0.9;
   position: relative;
   left: 1242px;
-  top: 105px;
+  top: 75px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -456,8 +474,8 @@ td {
 }
 #add-button {
   position: absolute;
-  left: 1120px;
-  top: 700px;
+  left: 1230px;
+  top: 540px;
 }
 
 #add-button:hover::after {
