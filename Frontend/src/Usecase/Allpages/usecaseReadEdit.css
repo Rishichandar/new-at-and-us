@@ -407,15 +407,15 @@
   overflow-x: auto; /* Enable horizontal scrolling if content overflows */
   white-space: nowrap; /* Prevent text wrapping */
 }
-.table-container {
+.table-container1 {
   max-height: 400px; /* Set the maximum height for the table container */
   overflow-y: auto; /* Enable vertical scrolling */
   width: 1025px;
   border-collapse: collapse;
   position: relative;
   top: 100px;
-  left: 100px;
+  left: 260px;
   text-align: center;
-  height: 200px;
+  height: 250px;
 }
 

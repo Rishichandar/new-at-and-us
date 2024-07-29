@@ -1,19 +1,22 @@
 #tab1 {
   /* table-layout: fixed; */
   padding: 1px;
-  overflow-y: auto; /* Changed to overflow-y */
+  overflow-x: auto;
   position: relative;
   bottom: 40px;
   border-collapse: collapse;
-  height: 230px;
+  max-height: 350px;
   top: 90px;
   width: 1120px;
-  left: 145px;
-  padding: 10px;
+  left: 195px;
+  padding: 5px;
 }
 th {
   background-color: #8DA399; /* Or any background color you prefer */
   /* Ensure it stays above the table body */
+  color: white;
+  font-size: 14px;
+  
 }
 #tab2 {
   padding: 1px;
@@ -21,10 +24,10 @@ th {
   position: relative;
   bottom: 40px;
   border-collapse: collapse;
-  max-height: 500px;
+  max-height: 350px;
   top: 90px;
   width: 1120px;
-  left: 145px;
+  left: 195px;
   padding: 5px;
 }
 .scrollable-cell1 {
@@ -341,7 +344,7 @@ td {
 }
 #all {
   position: relative;
-  left: 155px;
+  left: 195px;
   top: 60px;
   color: rgb(250, 8, 8);
 }

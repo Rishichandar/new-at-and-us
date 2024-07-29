@@ -25,7 +25,9 @@
 
 .pending-table th {
   background-color: #8DA399;
-  position: sticky;
+  position: sticky; 
+  color: white;
+  font-size: 14px;
   top: 0; 
   z-index: 2;
 }

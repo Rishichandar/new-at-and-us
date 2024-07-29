@@ -11,7 +11,7 @@
 .admincon table {
   width: 90%; /* Make the table fill the container */
   border-collapse: collapse; /* Collapse table borders */
-  margin-left: 115px;
+  margin-left: 105px;
   
  
 
@@ -22,7 +22,7 @@
 
 .admincon th,
 .admincon td {
-  padding: 10px;
+  padding: 13px;
   /* padding-left: 20px; Add padding to table cells */
   text-align: left; /* Center-align text */
   border: 1px solid rgb(114, 110, 110); /* Add black border */
@@ -31,7 +31,8 @@
 .admincon th {
   background-color: #8DA399;
   position: sticky;
-
+   color: white;
+   font-size: 14px;
   top: 0;
   z-index: 2;
 }

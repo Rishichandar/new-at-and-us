@@ -212,7 +212,7 @@ export const UsecaseReadEdit = () => {
           Download
         </button>
       )}
-      <div className="table-container">
+      <div className="table-container1">
       <table id="usecase-table">
         <thead>
           <tr>
