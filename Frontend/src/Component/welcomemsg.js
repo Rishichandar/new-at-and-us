@@ -78,22 +78,50 @@
 
 
 import React from "react";
+import styled from "styled-components";
 
+const Container = styled.div`
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  margin-left: 45px;
+
+  @media (max-width: 1200px) {
+    margin-left: 80px;
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 120px;
+    margin-top: 30px;
+    
+  }
+
+  @media (max-width: 480px) {
+    margin-left: 10px;
+  }
+`;
+
+const Text = styled.span`
+  font-size: 1.2rem;
+
+  @media (max-width: 1200px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
+`;
 
 export const Welcomemsg = () => {
-  // Permanently set the welcome message text
-  // const text = "Enhance productivity with our Attendance Management System!";
-  const text="Reliable Attendance tracking at your fingertips.";
+  const text = "Reliable Attendance tracking at your fingertips.";
   return (
-    <div
-      style={{
-        minHeight: "100px",
-        display: "flex",
-        alignItems: "center",
-        marginLeft: "45px",
-      }}
-    >
-      <span style={{fontSize:'1.2rem'}}>{text}</span>
-    </div>
+    <Container>
+      <Text>{text}</Text>
+    </Container>
   );
 };

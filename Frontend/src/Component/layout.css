@@ -1,4 +1,4 @@
-@keyframes fadeIn {
+/* @keyframes fadeIn {
   from {
     opacity: 0;
   }
@@ -45,4 +45,133 @@
   position: relative;
   bottom: 25px;
   
+} */
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.comment-input {
+  width: 300px;
+  height: 80px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.comment-input:hover {
+  border: 1px solid black;
+}
+.logo-wel {
+  height: inherit;
+  width: inherit;
+  object-fit: contain;
+}
+
+#firstImg {
+  width: 470px;
+  height: 370px;
+  position: relative;
+  bottom: 50px;
+}
+#secondImg {
+  width: 430px;
+  height: 330px;
+  position: relative;
+  bottom: 30px;
+  left: 30px;
+}
+#thirdImg {
+  width: 430px;
+  height: 300px;
+  position: relative;
+  bottom: 25px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .left-image, .right-side-div {
+    width: 100%;
+    margin: 0;
+  }
+
+  .inner-image {
+    width: 100%;
+    height: auto;
+  }
+
+  #firstImg, #secondImg, #thirdImg {
+    width: 100%;
+    height: auto;
+    position: relative;
+    bottom: 0;
+    left: 0;
+  }
+
+  .comment-input {
+    width: 90%;
+    height: 60px;
+    font-size: 14px;
+  }
+
+  .timing-container {
+    width: 90%;
+    height: auto;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-image, .right-side-div {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .inner-image {
+    width: 90%;
+    height: auto;
+  }
+
+  #firstImg, #secondImg, #thirdImg {
+    width: 100%;
+    height: auto;
+    bottom: 0;
+  }
+
+  .comment-input {
+    width: 80%;
+    height: 50px;
+    font-size: 12px;
+  }
+
+  .timing-container {
+    width:  100%;
+    height: auto;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .comment-input {
+    width: 70%;
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .timing-container {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+
+  .left-image, .right-side-div {
+    padding-top: 0;
+  }
 }
