@@ -86,7 +86,7 @@ export const Viewpermissions = () => {
 
   return (
     <div className="permissions-table">
-      <span id="permission" >Permission Requests</span>
+      <span id="permission" style={{fontWeight:500,fontSize:'17px'}}>View Permission :</span>
       <table>
         <thead>
           <tr>

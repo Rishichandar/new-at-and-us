@@ -438,7 +438,7 @@ font-family: "poppins";
   margin-bottom: 8px;
   margin-left: -10px;
   text-decoration: none;
-  color: #4d4949;
+  color: #2b2929;
   font-weight: 500;
   /* text-transform: uppercase; */
   
@@ -486,9 +486,9 @@ font-family: "poppins";
 .navbar-item2 {
   cursor: pointer;
   letter-spacing: 1px;
-  font-size: 13px;
+  font-size: 12px;
   margin-bottom: 30px;
-  margin-left: 5px;
+  margin-left: 3px;
   text-decoration: none;
   color: rgb(31, 30, 30);
 }

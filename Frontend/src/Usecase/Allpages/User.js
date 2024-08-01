@@ -12,12 +12,14 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { GoPlus } from "react-icons/go";
 import { IoMdPersonAdd } from "react-icons/io";
 import { FcViewDetails } from "react-icons/fc";
+import "./user.css";
 
 function User() {
   const [userData, setUserData] = useState(null);
   const [userId, setUserId] = useState("");
   const navigate = useNavigate();
   const Email = useSelector((state) => state.auth.user.Email);
+  console.log("login user email", Email);
   const [yourData, setYourData] = useState([]);
   const [projectData, setProjectData] = useState(null);
   const [projectTitle, setProjectTitle] = useState("");
@@ -31,6 +33,7 @@ function User() {
   const [showTab1, setShowTab1] = useState(true);
   const [showYourInfo, setShowYourInfo] = useState(true);
   const [isBlurAnimating, setIsBlurAnimating] = useState(false);
+ 
 
   useEffect(() => {
     fetchData1();
@@ -38,17 +41,39 @@ function User() {
     setIsBlurAnimating(true);
   }, []);
 
+  // const fetchData1 = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8000/project_infouser?email=${Email}`
+  //     );
+  //     const jsonData = await response.json();
+  //     setYourData(jsonData);
+  //   } catch (error) {
+  //     console.error("Error fetching data: ", error);
+  //   }
+  // };
+
   const fetchData1 = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/project_infouser?email=${Email}`
-      );
+      let response;
+      if (roleid === 5) {
+        // Fetch only team lead's projects
+        response = await fetch(`http://localhost:8000/project_info_for_lead?role_id=${roleid}&email=${Email}`);
+      } else if (roleid === 2) {
+        // Fetch only user's projects
+        response = await fetch(`http://localhost:8000/project_infouser?email=${Email}`);
+      }
       const jsonData = await response.json();
-      setYourData(jsonData);
+      if (response.ok) {
+        setYourData(jsonData);
+      } else {
+        console.error(jsonData.error);
+      }
     } catch (error) {
       console.error("Error fetching data: ", error);
     }
   };
+
 
   const searchId = useCallback(async () => {
     try {
@@ -163,6 +188,8 @@ function User() {
   };
 
   const tousecaseReadEdit = (title, email) => {
+    console.log("hi", email);
+    localStorage.setItem("email", email);
     navigate("/usecaseReadEdit", { state: { title, email } });
   };
 
@@ -195,135 +222,149 @@ function User() {
     navigate("/projectdetails");
   };
 
+  const roleid = useSelector((state) => state.auth.user.RoleId);
+  console.log("roleid :", roleid);
   return (
     <>
-      {!editMode && showYourInfo && (
+      {(!editMode && showYourInfo && roleid === 2) && (
         <span id="your-info">
           My Projects
           <IoMdArrowDropdown id="icon1" />
         </span>
       )}
+  
+      {(!editMode && showYourInfo && roleid === 5) && (
+        <span id="your-info">
+          All Projects
+          <IoMdArrowDropdown id="icon1" />
+        </span>
+      )}
+  
       <div className={`cont ${editMode ? "blur-background" : ""}`}>
         <div></div>
         <br></br>
         <br></br>
       </div>
-
-      
-        {editMode ? (
-          <div id="box">
-            <form id="f">
-              <label id="titlee">Title</label>
-              <input
-                id="edit-title"
-                type="text"
-                name="Title"
-                value={editedData.Title}
-                onChange={handleChanges}
-              />
-              <br></br>
-              <label id="des">Description</label>
-              <input
-                id="edit-des"
-                type="text"
-                name="Description"
-                value={editedData.Description}
-                onChange={handleChanges}
-              />
-              <br></br>
-              <label id="team">Team</label>
-              <input
-                id="edit-team"
-                type="text"
-                name="Team"
-                value={editedData.Team}
-                onChange={handleChanges}
-              />
-              <br></br>
-              <label id="tools">Tools</label>
-              <input
-                id="edit-tools"
-                type="text"
-                name="Tools"
-                value={editedData.Tools}
-                onChange={handleChanges}
-              />
-              <br></br>
-              <button
-                id="sub2"
-                onClick={() => {
-                  saveChanges();
-                  setEditMode(false);
-                }}
-              >
-                Save
-              </button>
-              <span id="back-button" onClick={() => setEditMode(false)}>
-                <IoArrowBack size={20} style={{ color: " #4f4f52" }} />
-              </span>
-              <br></br>
-            </form>
-          </div>
-        ) : (
-          <div id="tab-user">
-          <table
-            className="table"
-            style={{ filter: showTab1 ? "blur(0px)" : "blur(20px)" }}
-          >
-            <thead>
-              <tr>
-                <th id="tth">Project Title</th>
-                <th id="tth">Description</th>
-                <th id="tth">Team members</th>
-                <th id="tth">Start Date</th>
-                <th id="tth">Deadline</th>
-                <th id="tth">Tools used</th>
-                <th id="tth" colSpan={4}>Activity</th>
-              </tr>
-            </thead>
-            <tbody>
-              {yourData.length === 0 ? (
+  
+      {editMode ? (
+        <div id="box">
+          <form id="f">
+            <label id="titlee">Title</label>
+            <input
+              id="edit-title"
+              type="text"
+              name="Title"
+              value={editedData.Title}
+              onChange={handleChanges}
+            />
+            <br></br>
+            <label id="des">Description</label>
+            <input
+              id="edit-des"
+              type="text"
+              name="Description"
+              value={editedData.Description}
+              onChange={handleChanges}
+            />
+            <br></br>
+            <label id="team">Team</label>
+            <input
+              id="edit-team"
+              type="text"
+              name="Team"
+              value={editedData.Team}
+              onChange={handleChanges}
+            />
+            <br></br>
+            <label id="tools">Tools</label>
+            <input
+              id="edit-tools"
+              type="text"
+              name="Tools"
+              value={editedData.Tools}
+              onChange={handleChanges}
+            />
+            <br></br>
+            <button
+              id="sub2"
+              onClick={() => {
+                saveChanges();
+                setEditMode(false);
+              }}
+            >
+              Save
+            </button>
+            <span id="back-button" onClick={() => setEditMode(false)}>
+              <IoArrowBack size={20} style={{ color: "#4f4f52" }} />
+            </span>
+            <br></br>
+          </form>
+        </div>
+      ) : (
+        <div className="table-container">
+          <div className="scrollable-container">
+            <table
+              className="table"
+              style={{ filter: showTab1 ? "blur(0px)" : "blur(20px)" }}
+            >
+              <thead>
                 <tr>
-                  <td colSpan="9">No projects added</td>
+                  <th id="tth">Project Title</th>
+                  <th id="tth">Description</th>
+                  <th id="tth">Team members</th>
+                  <th id="tth">Start Date</th>
+                  <th id="tth">Deadline</th>
+                  <th id="tth">Tools used</th>
+                  <th id="tth" colSpan={4}>Activity</th>
                 </tr>
-              ) : (
-                yourData.map((obj) => (
-                  <tr key={obj.Projectid}>
-                    <td>{obj.Title}</td>
-                    <td className="scrollable-cell2">{obj.Description}</td>
-                    <td>{obj.Team}</td>
-                    <td>{obj.Startdate.substring(0, 10)}</td>
-                    <td>{obj.Deadline.substring(0, 10)}</td>
-                    <td>{obj.Tools}</td>
-                    <td className="edit" onClick={() => handleEdit(obj)}>
-                      <MdEdit size={18} style={{ color: "rgb(97, 94, 94)" }} />
-                    </td>
-                    <td className="usecase" style={{ cursor: "pointer" }}>
-                      <span
-                        onClick={() =>
-                          tousecase(obj.Title, obj.Team, obj.Email)
-                        }
-                        style={{ cursor: "pointer" }}
-                      >
-                        <IoMdPersonAdd size={17} />
-                      </span>
-                    </td>
-                    <td className="viewusecase" style={{ cursor: "pointer" }}>
-                      <span
-                        onClick={() => tousecaseReadEdit(obj.Title, obj.Email)}
-                      >
-                        <FcViewDetails size={17} />
-                      </span>
-                    </td>
+              </thead>
+              <tbody>
+                {yourData.length === 0 ? (
+                  <tr>
+                    <td colSpan="9">No projects added</td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : (
+                  yourData.map((obj) => (
+                    <tr key={obj.Projectid}>
+                      <td>{obj.Title}</td>
+                      <td className="scrollable-cell2">{obj.Description}</td>
+                      <td>{obj.Team}</td>
+                      <td>{obj.Startdate.substring(0, 10)}</td>
+                      <td>{obj.Deadline.substring(0, 10)}</td>
+                      <td>{obj.Tools}</td>
+                      {roleid === 5 && (
+                        <td className="edit" onClick={() => handleEdit(obj)}>
+                          <MdEdit size={18} style={{ color: "rgb(97, 94, 94)" }} />
+                        </td>
+                      )}
+                      {roleid === 5 && (
+                        <td className="usecase" style={{ cursor: "pointer" }}>
+                          <span
+                            onClick={() =>
+                              tousecase(obj.Title, obj.Team, obj.Email)
+                            }
+                            style={{ cursor: "pointer" }}
+                          >
+                            <IoMdPersonAdd size={17} />
+                          </span>
+                        </td>
+                      )}
+                      <td className="viewusecase" style={{ cursor: "pointer" }}>
+                        <span
+                          onClick={() => tousecaseReadEdit(obj.Title, obj.Email)}
+                        >
+                          <FcViewDetails size={17} />
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
           </div>
-        )}
-      
-
+        </div>
+      )}
+  
       <div className={`toggle-bar ${toggleBarOpen ? "open" : ""}`}>
         <div className="toggle-bar-content">
           <table id="mini1">
@@ -352,11 +393,14 @@ function User() {
           </span>
         </div>
       </div>
+  
       {!editMode && (
         <div>
-          <div className="circle" id="add-button" onClick={addProject}>
-            <GoPlus size={40} color="white" />
-          </div>
+          {roleid === 5 && (
+            <div className="circle" id="add-button" onClick={addProject}>
+              <GoPlus size={40} color="white" />
+            </div>
+          )}
         </div>
       )}
     </>

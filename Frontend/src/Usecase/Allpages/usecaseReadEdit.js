@@ -11,21 +11,51 @@ import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
 import { BiTask } from "react-icons/bi";
 import { IoMdArrowDropdown } from "react-icons/io";
+import "./usecaseReadEdit.css";
 
 export const UsecaseReadEdit = () => {
   const location = useLocation();
   const title = location.state?.title;
+  // const email = location.state?.email;
   const [usecases, setUsecases] = useState([]);
   const [editModeId, setEditModeId] = useState(null);
   const [editedUsecase, setEditedUsecase] = useState({});
+  const [email, setEmail] = useState(localStorage.getItem("email") || location.state?.email || "");
+  
   const navigate = useNavigate();
+  
 
+   // Store email in local storage if it's available in location.state
+   useEffect(() => {
+    if (location.state?.email) {
+      localStorage.setItem("email", location.state.email);
+      setEmail(location.state.email);
+    }
+  }, [location.state]);
+
+  // useEffect(() => {
+  //   const fetchUsecases = async () => {
+  //     try {
+  //       if (!title) return;
+  //       const response = await axios.get(
+  //         `http://localhost:8000/usecases?title=${encodeURIComponent(title)}`
+  //       );
+  //       setUsecases(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching use cases:", error);
+  //     }
+  //   };
+  //   fetchUsecases();
+  // }, [title]);
+
+  // const Email = useSelector((state) => state.auth.user.Email);
+  // console.log("email id :", Email);
   useEffect(() => {
     const fetchUsecases = async () => {
       try {
-        if (!title) return;
+        if (!email) return;
         const response = await axios.get(
-          `http://localhost:8000/usecases?title=${encodeURIComponent(title)}`
+          `http://localhost:8000/usecases?title=${encodeURIComponent(email)}`
         );
         setUsecases(response.data);
       } catch (error) {
@@ -190,12 +220,22 @@ export const UsecaseReadEdit = () => {
     downloadCSV2(taskData);
   };
 
+
   return (
     <>
-      <span id="your-info1">
-        Usecases
-        <IoMdArrowDropdown id="icon1" />
-      </span>
+      {(Roleid === 2) && (
+        <span id="your-info1">
+          My Usecase
+          <IoMdArrowDropdown id="icon1" />
+        </span>
+      )}
+  
+      {(Roleid === 5) && (
+        <span id="your-info1">
+          All Usecase
+          <IoMdArrowDropdown id="icon1" />
+        </span>
+      )}
       <Stack spacing={2} direction="row">
         {Roleid === 1 ? (
           <Button id="admin-back-btn" variant="outlined" onClick={adminBack}>
@@ -207,218 +247,201 @@ export const UsecaseReadEdit = () => {
           </Button>
         )}
       </Stack>
-      {Roleid === 1 && (
+      {Roleid === 5 && (
         <button id="usecase-down" onClick={downloadAllCSV1}>
           Download
         </button>
       )}
       <div className="table-container1">
-      <table id="usecase-table">
-        <thead>
-          <tr>
-            <th id="Th">Title</th>
-            <th id="Th">Summary</th>
-            <th id="Th" className="scrollable-cell3">Description</th>
-            <th id="Th">Team</th>
-            <th id="Th">Status</th>
-            <th id="Th">End Date</th>
-            {Roleid !== 1 && <th colSpan="4" id="Th">Actions</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {usecases.length === 0 ? (
-            <tr>
-              <td colSpan="9">No use cases added</td>
-            </tr>
-          ) : (
-            usecases.map((usecase) => (
-              <tr key={usecase.id}>
-                <td>{title}</td>
-                <td>
-                  {editModeId === usecase.id ? (
-                    <input
-                      id="edit-input"
-                      type="text"
-                      name="summary"
-                      value={editedUsecase.summary}
-                      onChange={handleInputChange}
-                      className="enabled-input"
-                    />
-                  ) : (
-                    usecase.summary
-                  )}
-                </td>
-                {/* <td> */}
-                <td
-                  className={
-                    editModeId === usecase.id ? "editing" : "scrollable-cell3"
-                  }
-                >
-                  {editModeId === usecase.id ? (
-                    <input
-                      id="edit-input"
-                      type="text"
-                      name="description"
-                      value={editedUsecase.description}
-                      onChange={handleInputChange}
-                      className="enabled-input"
-                    />
-                  ) : (
-                    usecase.description
-                  )}
-                </td>
-                <td>
-                  {editModeId === usecase.id ? (
-                    <input
-                      id="edit-input"
-                      type="text"
-                      name="team"
-                      value={editedUsecase.team}
-                      onChange={handleInputChange}
-                      className="enabled-input"
-                    />
-                  ) : Array.isArray(usecase.team) ? (
-                    usecase.team.join(", ")
-                  ) : (
-                    usecase.team
-                  )}
-                </td>
-                <td>
-                  {editModeId === usecase.id ? (
-                    <input
-                      id="edit-input"
-                      type="text"
-                      name="status"
-                      value={editedUsecase.status}
-                      onChange={handleInputChange}
-                      className="enabled-input"
-                    />
-                  ) : (
-                    usecase.status
-                  )}
-                </td>
-                <td>
-                  {editModeId === usecase.id ? (
-                    <input
-                      id="edit-input"
-                      type="date"
-                      name="enddate"
-                      value={editedUsecase.enddate}
-                      onChange={handleInputChange}
-                      className="enabled-input"
-                    />
-                  ) : // new Date(usecase.enddate).toLocaleDateString()
-                  usecase.enddate ? (
-                    new Date(usecase.enddate).toLocaleDateString()
-                  ) : (
-                    "no date added"
-                  )}
-                </td>
-                {Roleid !== 1 && (
-                  <>
-                    <td>
-                      {editModeId === usecase.id ? (
-                        <button
-                          id="edit-submit"
-                          onClick={handleSubmit}
-                          className="enabled-btn"
-                          disabled={
-                            editedUsecase.summary === "" ||
-                            editedUsecase.description === "" ||
-                            editedUsecase.team === "" ||
-                            editedUsecase.status === "" ||
-                            editedUsecase.enddate === ""
-                          }
-                        >
-                          Submit
-                        </button>
-                      ) : (
-                        <button
-                          id="edit-submit"
-                          className="disabled-btn"
-                          disabled
-                        >
-                          Submit
-                        </button>
-                      )}
-                    </td>
-                    <td>
-                      {editModeId === usecase.id ? (
-                        <button id="edit-cancel" onClick={handleCancelEdit}>
-                          <IoClose size={20} />
-                        </button>
-                      ) : (
-                        <span
-                          onClick={() => handleEditClick(usecase.id)}
-                          id="usecase-edit"
-                        >
-                          <MdEdit />
-                        </span>
-                      )}
-                    </td>
-                    <td>
-                      <span
-                        className="task1"
-                        onClick={() => totask(title, usecase.summary)}
-                        id="taskdetails"
-                        size={30}
-                      >
-                        <MdOutlineTask size={19} />
-                      </span>
-                    </td>
-                  </>
-                )}
-
-                <td>
-                  <span
-                    className="task"
-                    onClick={() => handleTaskButtonClick(usecase.summary)}
-                    id="taskdetails"
-                    size={30}
-                  >
-                    <BiTask size={18} />
-                  </span>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-      </div>
-      {/* <div className={`toggle-bar ${toggleBarOpen ? "open" : ""}`}>
-        <div className="toggle-bar-content">
-          <table id="mini1">
+        <div className="scrollable-container">
+          <table id="usecase-table">
             <thead>
               <tr>
-                <th>Usecase</th>
-                <th>Daily Task</th>
-                <th>Date</th>
-                <th>Time</th>
+                <th id="Th">Title</th>
+                <th id="Th">Summary</th>
+                <th id="Th" className="scrollable-cell3">Description</th>
+                <th id="Th">Team</th>
+                <th id="Th">Status</th>
+                <th id="Th">End Date</th>
+                {Roleid !== 1 && <th colSpan="4" id="Th">Actions</th>}
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(taskData) &&
-                taskData.map((obj) => (
-                  <tr key={obj.ID}>
-                    <td>{obj.usecasetitle}</td>
-                    <td >{obj.Dailytask}</td>
-                    <td>{obj.Date.substring(0, 10)}</td>
-                    <td>{obj.Time}</td>
+              {usecases.length === 0 ? (
+                <tr>
+                  <td colSpan="9">No use cases added</td>
+                </tr>
+              ) : (
+                usecases.map((usecase) => (
+                  <tr key={usecase.id}>
+                    <td>{usecase.title}</td>
+                    <td>
+                      {editModeId === usecase.id ? (
+                        <input
+                          id="edit-input"
+                          type="text"
+                          name="summary"
+                          value={editedUsecase.summary}
+                          onChange={handleInputChange}
+                          className="enabled-input"
+                        />
+                      ) : (
+                        usecase.summary
+                      )}
+                    </td>
+                    <td
+                      className={
+                        editModeId === usecase.id ? "editing" : "scrollable-cell3"
+                      }
+                    >
+                      {editModeId === usecase.id ? (
+                        <input
+                          id="edit-input"
+                          type="text"
+                          name="description"
+                          value={editedUsecase.description}
+                          onChange={handleInputChange}
+                          className="enabled-input"
+                        />
+                      ) : (
+                        usecase.description
+                      )}
+                    </td>
+                    <td>
+                      {editModeId === usecase.id ? (
+                        <input
+                          id="edit-input"
+                          type="text"
+                          name="team"
+                          value={editedUsecase.team}
+                          onChange={handleInputChange}
+                          className="enabled-input"
+                        />
+                      ) : Array.isArray(usecase.team) ? (
+                        usecase.team.join(", ")
+                      ) : (
+                        usecase.team
+                      )}
+                    </td>
+                    <td>
+                      {editModeId === usecase.id ? (
+                        <input
+                          id="edit-input"
+                          type="text"
+                          name="status"
+                          value={editedUsecase.status}
+                          onChange={handleInputChange}
+                          className="enabled-input"
+                        />
+                      ) : (
+                        usecase.status
+                      )}
+                    </td>
+                    <td>
+                      {editModeId === usecase.id ? (
+                        <input
+                          id="edit-input"
+                          type="date"
+                          name="enddate"
+                          value={editedUsecase.enddate}
+                          onChange={handleInputChange}
+                          className="enabled-input"
+                        />
+                      ) : // new Date(usecase.enddate).toLocaleDateString()
+                        usecase.enddate ? (
+                          new Date(usecase.enddate).toLocaleDateString()
+                        ) : (
+                          "no date added"
+                        )}
+                    </td>
+                    {Roleid !== 1 && (
+                      <>
+                        {editModeId === usecase.id ? (
+                          <td>
+                            <button
+                              id="edit-submit"
+                              onClick={handleSubmit}
+                              className="enabled-btn"
+                              disabled={
+                                editedUsecase.summary === "" ||
+                                editedUsecase.description === "" ||
+                                editedUsecase.team === "" ||
+                                editedUsecase.status === "" ||
+                                editedUsecase.enddate === ""
+                              }
+                            >
+                              Submit
+                            </button>
+                          </td>
+                        ) : (
+                          Roleid === 5 && (
+                            <td>
+                              <button
+                                id="edit-submit"
+                                className="disabled-btn"
+                                disabled
+                              >
+                                Submit
+                              </button>
+                            </td>
+                          )
+                        )}
+  
+                        {editModeId === usecase.id ? (
+                          <td>
+                            <button id="edit-cancel" onClick={handleCancelEdit}>
+                              <IoClose size={20} />
+                            </button>
+                          </td>
+                        ) : (
+                          Roleid === 5 && (
+                            <td>
+                              <span
+                                onClick={() => handleEditClick(usecase.id)}
+                                id="usecase-edit"
+                              >
+                                <MdEdit />
+                              </span>
+                            </td>
+                          )
+                        )}
+                        {Roleid === 2 && (
+                          <td>
+                            <span
+                              className="task1"
+                              onClick={() => totask(usecase.title, usecase.summary)}
+                              id="taskdetails"
+                              size={30}
+                            >
+                              <MdOutlineTask size={19} />
+                            </span>
+                          </td>
+                        )}
+                      </>
+                    )}
+  
+                    <td>
+                      <span
+                        className="task"
+                        onClick={() => handleTaskButtonClick(usecase.summary)}
+                        id="taskdetails"
+                        size={30}
+                      >
+                        <BiTask size={18} />
+                      </span>
+                    </td>
                   </tr>
-                ))}
+                ))
+              )}
             </tbody>
           </table>
-          <span onClick={closeToggleBar}>
-            <IoClose />
-          </span>
-          <button onClick={downloadAllCSV2} id="down-al2">
-            Download csv
-          </button>
         </div>
-      </div> */}
-        <div className={`toggle-bar ${toggleBarOpen ? "open" : ""}`}>
+      </div>
+  
+      <div className={`toggle-bar ${toggleBarOpen ? "open" : ""}`}>
         <div className="toggle-bar-content">
-          <div className="scroll-container">
+        <div className="table-container2">
+          <div className="scroll-container2">
             <table id="mini1">
               <thead>
                 <tr>
@@ -433,7 +456,7 @@ export const UsecaseReadEdit = () => {
                   taskData.map((obj) => (
                     <tr key={obj.ID}>
                       <td style={{ width: "35%" }}>{obj.usecasetitle}</td>
-                      <td style={{ width: "40%" }}className="scrollable-cell4">{obj.Dailytask}</td>
+                      <td style={{ width: "40%" }} className="scrollable-cell4">{obj.Dailytask}</td>
                       <td style={{ width: "35%" }}>{obj.Date.substring(0, 10)}</td>
                       <td style={{ width: "35%" }}>{obj.Time}</td>
                     </tr>
@@ -441,7 +464,8 @@ export const UsecaseReadEdit = () => {
               </tbody>
             </table>
           </div>
-          <span onClick={closeToggleBar}>
+          </div>
+          <span onClick={closeToggleBar} id="close-bar">
             <IoClose />
           </span>
           <button onClick={downloadAllCSV2} id="down-al2">
@@ -451,4 +475,5 @@ export const UsecaseReadEdit = () => {
       </div>
     </>
   );
+  
 };

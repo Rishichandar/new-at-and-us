@@ -149,30 +149,50 @@ app.put("/api/project_info/canceldelete/:Projectid", (req, res) => {
 //creating record
 
 //post(updated)
-app.post("/project_infos", (req, res) => {
-  const sql =
-    "INSERT INTO project_info (`Title`,`Email`,`Description`,`Team`,`Startdate`,`Deadline`,`Tools`,`Files`) Values (?)";
-  let details = [
-    req.body.Title,
-    req.body.Email,
-    req.body.Description,
-    req.body.Team,
-    req.body.Startdate,
-    req.body.Deadline,
-    req.body.Tools,
-    req.body.Files,
-  ];
-  //execute query
+// app.post("/project_infos", (req, res) => {
+//   const sql =
+//     "INSERT INTO project_info (`Title`,`Email`,`Description`,`Team`,`Startdate`,`Deadline`,`Tools`,`Files`) Values (?)";
+//   let details = [
+//     req.body.Title,
+//     req.body.Email,
+//     req.body.Description,
+//     req.body.Team,
+//     req.body.Startdate,
+//     req.body.Deadline,
+//     req.body.Tools,
+//     req.body.Files,
+//   ];
+//   //execute query
 
-  db.query(sql, [details], (error, data) => {
+//   db.query(sql, [details], (error, data) => {
+//     if (error) {
+//       console.log(error);
+//     } else {
+//       console.log("hi");
+//       return res.json(data);
+//     }
+//   });
+// });
+
+app.post("/project_infos", (req, res) => {
+  const { Title, Assigner, Description, Team, Startdate, Deadline, Tools, Files, Emails } = req.body;
+
+  // Prepare SQL and data for each email
+  const sql = "INSERT INTO project_info (`Title`, `Email`, `Description`, `Team`, `Startdate`, `Deadline`, `Tools`, `Files` ,`Assigner`) VALUES ?";
+  const values = Emails.map(email => [Title, email, Description, Team, Startdate, Deadline, Tools, Files,Assigner]);
+
+  // Execute query
+  db.query(sql, [values], (error, data) => {
     if (error) {
       console.log(error);
+      res.status(500).json({ error: "Error inserting project details" });
     } else {
-      console.log("hi");
-      return res.json(data);
+      console.log("Project details inserted successfully");
+      res.status(200).json(data);
     }
   });
 });
+
 
 // app.post("/taskdetails", (req, res) => {
 //   const { taskDetails, emailid, Title, summary } = req.body;
@@ -237,7 +257,7 @@ app.get("/project_info", (req, res) => {
   });
 });
 
-//(updated)for view the login user records and get the data in database
+// (updated)for view the login user records and get the data in database
 app.get("/project_infouser", (req, res) => {
   const userEmail = req.query.email; // Extract email from query parameters
   const sql = "SELECT * FROM project_info WHERE email = ?"; // Adjust SQL query
@@ -247,6 +267,27 @@ app.get("/project_infouser", (req, res) => {
     } else {
       return res.json(result);
     }
+  });
+});
+
+
+// Fetch project details for team leads
+app.get("/project_info_for_lead", (req, res) => {
+  const userEmail = req.query.email; // Extract email from query parameters
+  const roleId = req.query.role_id; // Extract role_id from query parameters
+
+  if (roleId !== '5') {
+    return res.status(403).json({ error: "Access denied" });
+  }
+
+  const sql = "SELECT * FROM project_info WHERE Assigner = ? AND is_deleted = 0";
+
+  db.query(sql, [userEmail], function (error, result) {
+    if (error) {
+      console.error("Error querying MySQL database:", error);
+      return res.status(500).json({ error: "Internal app error" });
+    }
+    return res.json(result);
   });
 });
 
@@ -392,7 +433,7 @@ app.get("/usecases", (req, res) => {
 
   // If email is provided, add a WHERE clause to filter results by email
   if (title) {
-    sql += ` WHERE title = '${title}'`;
+    sql += ` WHERE reporterid = '${title}'`;
   }
 
   db.query(sql, (err, result) => {
@@ -403,6 +444,36 @@ app.get("/usecases", (req, res) => {
     }
   });
 });
+
+// app.get('/api/employees', (req, res) => {
+//   let sql = "SELECT Emp_Name,Email FROM emp_info"; // Include email in the query
+//   db.query(sql, (err, result) => {
+//     if (err) {
+//       res.status(500).json({ error: "Error retrieving employee details" });
+//     } else {
+//       // Transform the result to include both name and email
+//       const employees = result.map(row => ({
+//         name: row.Emp_Name,
+//         email: row.Email
+//       }));
+//       console.log(employees);
+//       res.status(200).json(employees);
+//     }
+//   });
+// });
+app.get('/api/employees', (req, res) => {
+  let sql = "SELECT Emp_Name as name,Email as email FROM emp_info";
+  db.query(sql, (err, result) => {
+    if (err) {
+      res.status(500).json({ error: "Error retrieving employee data" });
+    } else {
+      res.status(200).json(result);
+    }
+  });
+});
+
+
+
 
 //put method
 app.put("/usecases/:id", (req, res) => {

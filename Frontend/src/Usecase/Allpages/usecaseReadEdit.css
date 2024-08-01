@@ -25,70 +25,37 @@
   font-weight: 500;
   color: #4072a7;
 }
-/* #mini1 {
-  position: absolute;
-  width: 800px;
-  top: 100px;
-  left: 15px;
-  max-height: 100px;
-  overflow-y: hidden; 
-  z-index: 0;
-  border-collapse: collapse; 
-}
-#mini1 thead {
-  display: table;
-  width: 100%;
-  table-layout: fixed; 
-}
-
-#mini1 tbody {
-  display: block;
-  max-height: 600px;
-  overflow-y: auto;
-  width: 100%;
-}
-
-#mini1 tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed; 
-}
-
-#mini1 th, #mini1 td {
-  padding: 8px;
-  text-align: left;
-  border: 1px solid #ddd;
-  width: 25%; 
-} */
 
  /* Ensuring the container can handle horizontal and vertical scrolling */
- .scroll-container {
-  width: 825px; /* Set the desired width */
-  max-height: 900px; /* Set the maximum height for the table */
-  overflow: auto; /* Enable both vertical and horizontal scrolling */
+ /* .scroll-container {
+  width: 825px;
+  max-height: 900px; 
+  overflow: auto; 
   position: absolute;
   top: 100px;
   left: 30px;
 }
 
 #mini1 {
-  width: 100%;
-  border-collapse: collapse; /* Ensure borders collapse */
-  table-layout: fixed; /* Ensures table layout remains fixed */
+  width: 90%;
+  border-collapse: collapse; 
+  table-layout: fixed; 
+  position: relative;
+  left: 50px;
 }
 
 #mini1 thead {
   display: table;
   padding-left: 20px;
-  width: calc(100% - 19px); /* Adjust for scrollbar width */
-  table-layout: fixed; /* Ensures table layout remains fixed */
+  width: calc(100% - 19px); 
+  table-layout: fixed; 
 }
 
 #mini1 tbody {
-  display: block; /* Allows tbody to be scrollable */
-  max-height: 650px; /* Adjust this value as needed */
+  display: block; 
+  max-height: 350px; 
   overflow-y: scroll;
-  overflow-x: hidden; /* Prevent horizontal overflow */
+  overflow-x: hidden; 
   width: 100%;
 }
 
@@ -102,11 +69,11 @@
   padding: 8px;
   text-align: left;
   border: 1px solid #ddd;
-  box-sizing: border-box; /* Include padding and border in width */
+  box-sizing: border-box; 
 }
 
 .scroll-container::-webkit-scrollbar {
-  height: 10px; /* Set the height for the horizontal scrollbar */
+  height: 10px; 
 }
 
 .scroll-container::-webkit-scrollbar-thumb {
@@ -117,7 +84,7 @@
 .scroll-container::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-
+ */
 
 
 #datas {
@@ -325,13 +292,14 @@
 }
 .toggle-bar {
   position: fixed;
-  top: 65px;
+  top: 63px;
   right: -900px; /* initially off-screen */
   height: 100%;
   width: 900px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   transition: right 0.3s ease; /* animate the right property */
+  z-index: 5;
 }
 
 .toggle-bar.open {
@@ -339,7 +307,7 @@
 }
 
 .toggle-bar-content {
-  padding: 30px;
+  padding: 10px;
 }
 
 #your-info1 {
@@ -373,27 +341,32 @@
   color: white;
   border-radius: 5px;
   margin: -0.625rem auto;
-  position: relative;
-  top: 10px;
-  left: 240px;
+  position: absolute;
+  top: 30px;
+  right: 60px;
   transition: all 250ms;
   font-family: sans-serif;
   background-color: #38d845;
-  margin-left: 430px;
+  
 }
-.scrollable-cell3 {
-  max-width: 150px; /* Adjust the height as needed */
+#close-bar{
+  position: absolute;
+  top: 30px;
+
+}
+/* .scrollable-cell3 {
+  max-width: 150px;
  max-height: 10px;
   overflow-y: auto;
-  padding: 10px; /* Optional: Adjust padding as needed */
+  padding: 10px; 
   
 }
 
 .scrollable-cell4 {
-  max-width: 100px; /* Adjust the height as needed */
+  max-width: 100px; 
  max-height: 10px;
   overflow-y: auto;
-  padding: 5px; /* Optional: Adjust padding as needed */
+  padding: 5px; 
   
 }
 
@@ -403,13 +376,13 @@
 
 
 .scrollable-cell3 {
-  max-width: 200px; /* Set a max-width for the scrollable cells */
-  overflow-x: auto; /* Enable horizontal scrolling if content overflows */
-  white-space: nowrap; /* Prevent text wrapping */
+  max-width: 200px; 
+  overflow-x: auto; 
+  white-space: nowrap; 
 }
 .table-container1 {
-  max-height: 400px; /* Set the maximum height for the table container */
-  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 400px; 
+  overflow-y: auto; 
   width: 1025px;
   border-collapse: collapse;
   position: relative;
@@ -417,5 +390,130 @@
   left: 260px;
   text-align: center;
   height: 250px;
+} */
+
+/* Styles for the main table */
+.table-container1 {
+  display: flex;
+  justify-content: center;
+  margin: 80px auto;
+}
+.table-container2 {
+  display: flex;
+  justify-content: center;
+  margin: 80px auto;
 }
 
+
+#usecase-table {
+  border-collapse: collapse;
+  height: 400px;
+  margin-left: 200px;
+  width: 80%;
+}
+
+#usecase-table th,
+#usecase-table td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+#usecase-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  z-index: 0;
+}
+
+#usecase-table td {
+  background-color: #fff;
+}
+
+.scrollable-cell3 {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scrollable-cell3:hover {
+  overflow: auto;
+  white-space: normal;
+}
+
+#usecase-table thead th {
+  background-color: #49769b;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: center;
+}
+
+#usecase-table tbody tr td {
+  text-align: center;
+  color: #444343;
+  font-style: italic;
+  font-size: 14px;
+}
+
+/* Styles for the mini table */
+.scrollable-container {
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.scroll-container2 {
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+
+#mini1 {
+  border-collapse: collapse;
+  height: 400px;
+  width: 80%;
+  margin-left: 75px;
+  
+}
+
+#mini1 th,
+#mini1 td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+  
+}
+
+#mini1 th {
+  background-color: #e4e4e4;
+  font-weight: bold;
+}
+
+#mini1 td {
+  background-color: #fafafa;
+  font-style: italic;
+  font-size: 15px;
+  text-align: center;
+}
+
+.scrollable-cell4 {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scrollable-cell4:hover {
+  overflow: auto;
+  white-space: normal;
+}
+
+#mini1 thead th {
+  background-color: #6a9fb5;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: center;
+}

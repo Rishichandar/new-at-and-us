@@ -274,14 +274,14 @@ import "./Usecase/Navbar/navbar.css";
 import "./Usecase/Sidebar/sidebar.css";
 import "./Usecase/rightdiv/right-cont.css";
 import "./Usecase/Allpages/table.css";
-import "./Usecase/Allpages/user.css";
+// import "./Usecase/Allpages/user.css";
 import "./Usecase/Allpages/taskdetails.css";
 import { Home } from "./Usecase/Allpages/home.jsx";
 import Usecase from "./Usecase/Allpages/Usecase.js";
 import "./Usecase/Allpages/usecase.css";
 import "./pages/permission/pendingapproval.css"
 import { UsecaseReadEdit } from "./Usecase/Allpages/usecaseReadEdit.js";
-import "./Usecase/Allpages/usecaseReadEdit.css";
+// import "./Usecase/Allpages/usecaseReadEdit.css";
 import { ProtectedRoute } from "./CommonComponenets/ProtectedRoute/protectedRoute.jsx";
 import { Permission } from "./pages/permission/permission.js";
 import "./pages/permission/permission.css";

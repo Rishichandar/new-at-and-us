@@ -9,10 +9,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { useSelector, useDispatch } from "react-redux";
 
 function Titlecontent(){
   const [text, setText] = useState("Plan your everyday work...");
   const [displayText, setDisplayText] = useState('');
+  const data = useSelector((state) => state.auth.user);
+  const role=data.RoleId;
+  console.log("jana role",data.RoleId)
   useEffect(() => {
     let currentIndex = 0;
     let typedText = '';
@@ -64,7 +68,7 @@ function Titlecontent(){
         </div>
         
       
-        <Link to="/projectdetails" id="get-started">
+        {/* <Link to="/projectdetails" id="get-started">
           <button className="cta">
             <span>Get Started</span>
             <svg width="15px" height="10px" viewBox="0 0 13 10">
@@ -72,7 +76,18 @@ function Titlecontent(){
               <polyline points="8 1 12 5 8 9"></polyline>
             </svg>
           </button>
-        </Link>
+        </Link> */}
+        {role === 5 && (
+          <Link to="/projectdetails" id="get-started">
+            <button className="cta">
+              <span>Get Started</span>
+              <svg width="15px" height="10px" viewBox="0 0 13 10">
+                <path d="M1,5 L11,5"></path>
+                <polyline points="8 1 12 5 8 9"></polyline>
+              </svg>
+            </button>
+          </Link>
+        )}
     </div>
 
     

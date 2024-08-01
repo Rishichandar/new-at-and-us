@@ -14,6 +14,9 @@ import { toast } from "react-toastify";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import Checkbox from '@mui/material/Checkbox';
+import ListItemText from '@mui/material/ListItemText';
+import Image from "./s.png";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -36,40 +39,7 @@ const MenuProps = {
     },
   },
 };
-const names = [
-  "Rishi",
-  "Thirumavalavan",
-  "Jana",
-  "Nandhini",
-  "Manoj",
-  "Somusundaram",
-  "nagarajan",
-  "abdullah",
-  "Easuraja",
-  "Neha",
-  "Vinotha",
-  "Rokith",
-  "Sowmya",
-  "Sandhiya",
-  "Shanmugamoorthy",
-  "Karthickraja",
-  "Jayapriya",
-  "Gokul",
-  "Elakkiya",
-  "Udhaya",
-  "Akash",
-  "Thirumalaivasan",
-  "Jagadeesan",
-  "Jerusha",
-  "Madhi",
-  "S.Karthick",
-  "Rahul",
-  "Nivetha",
-  "sabari",
-  "Dhandapani",
-  "Theo",
-  "Lokesh",
-];
+
 
 function getStyles(name, personName, theme) {
   return {
@@ -86,18 +56,54 @@ function Projectdetails() {
   console.log("roleid :", roleid);
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
+  const [names, setNames] = useState([]);
+  const [emails, setEmails] = useState([]);
 
+  const [personEmail, setPersonEmail] = useState([]);
+
+  const [employees, setEmployees] = useState([]);
+  console.log('email', personEmail);
+  //api to fetch names
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/employees')
+      .then(response => {
+        setNames(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the employee names!', error);
+      });
+  }, []);
+
+  // const handleChange1 = (event) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   const selectedNames = typeof value === "string" ? value.split(",") : value;
+  //   const selectedEmails = selectedNames.map(name => {
+  //     const employee = names.find(emp => emp.name === name);
+  //     return employee ? employee.email : "";
+  //   });
+  //   setPersonName(selectedNames);
+  //   setPersonEmail(selectedEmails);
+  //   handleChange({ target: { name: "Team", value: selectedNames.join(",") } });
+  // };
   const handleChange1 = (event) => {
     const {
       target: { value },
     } = event;
     const selectedNames = typeof value === "string" ? value.split(",") : value;
-    const formattedValue =
-      typeof value === "string" ? value : selectedNames.join(",");
+    
+    // Update the logic to use `names` instead of `employee` for matching
+    const selectedEmails = selectedNames.map(name => {
+      const employee = names.find(emp => emp.name === name);
+      return employee ? employee.email : "";
+    });
+  
     setPersonName(selectedNames);
-    handleChange({ target: { name: "Team", value: formattedValue } });
+    setPersonEmail(selectedEmails);
+    handleChange({ target: { name: "Team", value: selectedNames.join(",") } });
   };
-
+  
   const handleChange = (event) => {
     setInputValue({ ...inputValue, [event.target.name]: event.target.value });
   };
@@ -106,7 +112,7 @@ function Projectdetails() {
 
   const [inputValue, setInputValue] = useState({
     Title: "",
-    Email: email,
+    Assigner: email,
     Description: "",
     Team: "",
     Startdate: "",
@@ -116,6 +122,38 @@ function Projectdetails() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setSubmitted(true);
+  //   if (
+  //     inputValue.Title.trim() === "" ||
+  //     inputValue.Tools.trim() === "" ||
+  //     !inputValue.Startdate ||
+  //     !inputValue.Deadline
+  //   ) {
+  //     toast.error("Fill in all the required fields.");
+  //     return;
+  //   }
+  //   axios
+  //     .post("http://localhost:8000/project_infos", inputValue)
+  //     .then((res) => console.log(res))
+  //     .catch((err) => console.log(err));
+  //   toast.success("submitted successfully");
+  //   setTimeout(() => {
+  //     navigate("/user");
+  //   }, 2000);
+  //   setInputValue({
+  //     Title: "",
+  //     Email: email,
+  //     Description: "",
+  //     Team: "",
+  //     Startdate: "",
+  //     Deadline: "",
+  //     Tools: "",
+  //     Files: "",
+  //   });
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
@@ -128,8 +166,15 @@ function Projectdetails() {
       toast.error("Fill in all the required fields.");
       return;
     }
+  
+    // Add emails to the inputValue
+    const projectDetails = {
+      ...inputValue,
+      Emails: personEmail,  // Add the emails here
+    };
+  
     axios
-      .post("http://localhost:8000/project_infos", inputValue)
+      .post("http://localhost:8000/project_infos", projectDetails)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     toast.success("submitted successfully");
@@ -138,7 +183,7 @@ function Projectdetails() {
     }, 2000);
     setInputValue({
       Title: "",
-      Email: email,
+      Assigner: email,
       Description: "",
       Team: "",
       Startdate: "",
@@ -171,12 +216,12 @@ function Projectdetails() {
 
   return (
     <div className="project-details-container">
+      <img src={Image} alt="Left Image" id="pr-image" style={{ width: "360px", height: "360px" }} />
       <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="sidebar-content">
           <p>Project Details</p>
           <div id="left-container">
-            <div id="page"></div>
-            <div id="title"></div>
+          
             <div id="right-container">
               <form onSubmit={handleSubmit} id="form1">
                 <div id="form">
@@ -194,7 +239,7 @@ function Projectdetails() {
                         "& .MuiOutlinedInput-root": {
                           "& fieldset": {
                             borderColor: "white",
-                            borderRadius: "25px", // Adding border radius
+                            borderRadius: "25px", // Adding border ras
                           },
                           "&:hover fieldset": {
                             borderColor: "white",
@@ -232,7 +277,7 @@ function Projectdetails() {
                       variant="outlined"
                       autoFocus
                       name="Email"
-                      value={inputValue.Email}
+                      value={inputValue.Assigner}
                       sx={{
                         width: "300px",
 
@@ -340,6 +385,7 @@ function Projectdetails() {
                       onBlur={handleBlur}
                       label={isFocused ? "Description *" : "Description"}
                     />
+                    
                     <FormControl
                       sx={{
                         m: 1,
@@ -377,22 +423,13 @@ function Projectdetails() {
                         Team{isFocused && "*"}
                       </InputLabel>
                       <Select
-                        name="Team"
-                        labelId="demo-multiple-name-label"
+                        labelId="demo-multiple-checkbox-label"
+                        id="demo-multiple-checkbox"
                         style={{ height: "73px" }}
                         multiple
                         value={personName}
                         onChange={handleChange1}
-                        input={
-                          <OutlinedInput
-                            label="Name"
-                            style={{
-                              fontSize: "10px",
-                              fontFamily:
-                                "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
-                            }}
-                          />
-                        }
+                        renderValue={(selected) => selected.join(", ")}
                         MenuProps={{
                           PaperProps: {
                             style: {
@@ -401,23 +438,19 @@ function Projectdetails() {
                             },
                           },
                         }}
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
                       >
                         {names.map((name) => (
-                          <MenuItem
-                            key={name}
-                            value={name}
-                            style={{
-                              fontFamily:
-                                "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
-                            }}
-                          >
-                            {name}
+                          <MenuItem key={name.name} value={name.name}>
+                            <Checkbox checked={personName.indexOf(name.name) > -1} />
+                            <ListItemText primary={name.name} />
                           </MenuItem>
                         ))}
                       </Select>
+            
                     </FormControl>
+                    
+
+
                   </tr>
                   <tr>
                     <input

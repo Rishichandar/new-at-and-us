@@ -73,7 +73,7 @@
   z-index: 500;
   position: fixed;
   overflow: hidden;
-  top: 69px;
+  top: 60px;
   right: -670px; /* initially off-screen */
   height: 84%;
   width: 670px;
@@ -88,4 +88,9 @@
 .sidebar-content {
   padding: 20px;
   color: white;
+}
+#pr-image{
+  position: absolute;
+  top:26%;
+  left: 240px;
 }

@@ -167,22 +167,22 @@ const Sidebar1 = () => {
     <section className="page sidebar-2-page">
       <aside className="sidebar-2 open">
         <div className="inner">
-          <nav> 
+          <nav>
             <button type="button" onClick={handleAttendanceManagementClick}>
               <span>
-                <Link to="/main"><RiAdminFill size={15} color="grey" style={{marginRight:'7px',marginTop:'5px'}} /></Link>
+                <Link to="/main"><RiAdminFill size={15} color="grey" style={{ marginRight: '7px', marginTop: '5px' }} /></Link>
               </span>
               <Link to="/main" style={{ textDecoration: "none" }}>
-                <span className="navbar-item" id= "head">Attendance</span>
+                <span className="navbar-item" id="head">Attendance</span>
               </Link>
             </button>
             {selectedItem === "AttendanceManagement" && (
               <div className="proj-div3">
                 <Link to="/allData" style={{ textDecoration: "none" }} className="material-symbols-outlined">
                   <button type="button" id="nav-button">
-                    
-                  
-                   <span className="navbar-item2"> Time Sheet</span>
+
+
+                    <span className="navbar-item2"> Time Sheet</span>
                   </button>
                 </Link>
 
@@ -192,7 +192,7 @@ const Sidebar1 = () => {
                     {/* <span>
                       <FaClipboardList />
                     </span> */}
-                     <span className="navbar-item2">Permission</span>
+                    <span className="navbar-item2">Permission</span>
                   </button>
                 </Link>
                 <Link to="/viewpermission" style={{ textDecoration: "none" }} className="material-symbols-outlined">
@@ -200,7 +200,7 @@ const Sidebar1 = () => {
                     {/* <span>
                       <FaClipboardCheck />
                      </span> */}
-                    
+
                     <span className="navbar-item2">View Permission</span>
                   </button>
                 </Link>
@@ -210,7 +210,7 @@ const Sidebar1 = () => {
                       {/* <span>
                         <FaHourglassHalf />
                       </span> */}
-                      
+
                       <span className="navbar-item2">Pending Requests</span>
                     </button>
                   </Link>
@@ -219,7 +219,7 @@ const Sidebar1 = () => {
             )}
             <button type="button" onClick={handleProjectManagementClick}>
               <span>
-                <Link to="/home"><LiaProjectDiagramSolid size={17} color="grey"style={{marginRight:'7px',marginTop:'5px'}} /></Link>
+                <Link to="/home"><LiaProjectDiagramSolid size={17} color="grey" style={{ marginRight: '7px', marginTop: '5px' }} /></Link>
               </span>
               <Link to="/home" style={{ textDecoration: "none" }}>
                 <span className="navbar-item">Project</span>
@@ -230,17 +230,20 @@ const Sidebar1 = () => {
                 {roleid === 1 && (
                   <Link to="/admin" style={{ textDecoration: "none" }} className="material-symbols-outlined">
                     <button type="button" id="nav-button">
-                      
+
                       <span className="navbar-item3">Admin</span>
                     </button>
                   </Link>
                 )}
-                <Link to="/user" style={{ textDecoration: "none" }} className="material-symbols-outlined">
-                  <button type="button" id="nav-button">
-                    
-                    <span className="navbar-item3">Details</span>
-                  </button>
-                </Link>
+                {roleid !== 1 && (
+                  <Link to="/user" style={{ textDecoration: "none" }} className="material-symbols-outlined">
+                    <button type="button" id="nav-button">
+
+                      <span className="navbar-item3">Project Details</span>
+                    </button>
+                  </Link>
+                )}
+
               </div>
             )}
           </nav>
@@ -282,7 +285,7 @@ export default Sidebar1;
 //     <section className="page sidebar-2-page">
 //       <aside className="sidebar-2 open">
 //         <div className="inner">
-//           <nav> 
+//           <nav>
 //             <button type="button" onClick={handleAttendanceManagementClick} className="main-nav-button">
 //               <span>
 //                 <Link to="/main"><RiAdminFill size={18} color="white" /></Link>

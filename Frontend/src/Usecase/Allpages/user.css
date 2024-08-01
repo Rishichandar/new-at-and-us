@@ -37,34 +37,6 @@
     0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
 }
 
-#tab-user {
- width: 1050px;
-  border-collapse: collapse;
-  position: relative;
-  bottom: 100px;
-  left: 230px;
-  text-align: center;
-  padding: 1px;
-  overflow-y: auto; 
-  border-collapse: collapse;
-  max-height:300px;
-  padding: 5px;
-
-}
-/* #table {
-  width: 1050px;
-   border-collapse: collapse;
-   position: relative;
-   bottom: 100px;
-   left: 230px;
-   text-align: center;
-   padding: 1px;
-   overflow-y: auto; 
-   border-collapse: collapse;
-   max-height:300px;
-   padding: 5px;
- 
- } */
 
 #box {
   position: absolute;
@@ -255,20 +227,6 @@
 }
 #box button:hover {
   background-color: #3d69c9;
-}
-#tth {
-  color: rgb(255, 255, 255);
-  font-size: 12px;
-  background-color: #8DA399;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  padding: 10px;
-}
-td {
-  text-align: center;
-  font-size: 14px;
-  padding: 9px;
 }
 
 #search-icon1 {
@@ -496,10 +454,80 @@ td {
   z-index: 999; /* Ensures the edit text appears above other elements */
 }
 
+
+
+/* Container to center the table */
+/* Container to center the table */
+.table-container {
+  display: flex;
+  justify-content: center;
+  margin: -70px auto; /* Center horizontally with auto margins */
+}
+
+/* Styles for the table */
+.table,
+#mini1 {
+  border-collapse: collapse;
+  width: 80%; /* Adjust width as needed */
+  height: 400px;
+  margin-left: 200px; /* Remove extra margin */
+}
+
+/* Scrollable container for table */
+.scrollable-container {
+  max-height: 200px; /* Adjust as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  width: 100%; /* Ensure it fills the container width */
+}
+
+/* Table styling */
+.table th,
+#mini1 th,
+.table td,
+#mini1 td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.table th,
+#mini1 th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.table td,
+#mini1 td {
+  background-color: #fff;
+}
+
+/* Scrollable cells for long content */
 .scrollable-cell2 {
-  max-width: 150px; /* Adjust the height as needed */
- max-height: 10px;
-  overflow-y: auto;
-  padding: 5px; /* Optional: Adjust padding as needed */
-  
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scrollable-cell2:hover {
+  overflow: auto;
+  white-space: normal;
+}
+
+/* Table header */
+.table thead th,
+#mini1 thead th {
+  background-color: #557c9c;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: center;
+}
+
+/* Styling for the "No projects added" row */
+.table tbody tr td {
+  text-align: center;
+  color: #444343;
+  font-style: italic;
+  font-size: 14px;
 }

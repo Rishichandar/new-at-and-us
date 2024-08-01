@@ -20,6 +20,7 @@ const Footer = () => {
         paddingLeft: 2,
       }}
     >
+      
       <Typography variant="body1" sx={{ position: "absolute", top: "40%",fontSize:"80%" }}>
         ©2024 Pozent. All Rights Reserved.
       </Typography>

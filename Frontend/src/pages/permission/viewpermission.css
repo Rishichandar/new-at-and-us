@@ -22,6 +22,9 @@
   text-align: center;
   border: 1px solid rgb(114, 110, 110);
 }
+.permissions-table td{
+  font-size: 14px;
+}
 
 .permissions-table th {
   background-color: #8DA399;
