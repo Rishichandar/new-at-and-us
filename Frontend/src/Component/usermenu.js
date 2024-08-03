@@ -137,7 +137,18 @@ const UserMenu = () => {
                 justifyContent={"space-around"}
               >
                 <Typography color={data.RoleId === 2 ? "green" : "red"}>
-                  {data.RoleId === 2 ? "User" : "Admin"}
+                
+                  {
+                    data.RoleId === 2 ? (
+                      "User"
+                    ) : data.RoleId === 1 ? (
+                      "Admin"
+                    ) : data.RoleId === 5 ? (
+                      "Team lead"
+                    ): data.RoleId === 4 ?(
+                      "HR"
+                    ):null
+                  }
                 </Typography>
                 <Button onClick={handleLogout}>
                   <ExitToApp />
@@ -148,28 +159,22 @@ const UserMenu = () => {
 
             <Divider />
             <List>
-              {data.RoleId === 2 ? (
-                <Box>
-                  <p style={{ color: "red" }}>Under Development Process!!</p>
-                </Box>
-              ) : (
+              {
+               data.RoleId === 1 && (
                 <ListItem button onClick={register}>
                   <Person sx={{ mr: 2 }} />
                   <ListItemText primary="Register" />
                 </ListItem>
               )}
 
-              <ListItem button>
-                <Settings sx={{ mr: 2 }} />
-                <ListItemText primary="Settings" />
-              </ListItem>
+             
             </List>
           </Box>
         </Modal>
         <div style={{ width: "100%", height: "100%" }}>
           <Outlet />
         </div>
-        <Footer/>
+        <Footer />
         {/* <footer
           style={{
             width: "100%",

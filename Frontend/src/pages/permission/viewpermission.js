@@ -58,6 +58,8 @@ import { useSelector } from "react-redux";
 import { getPermissions } from "../../HTTPHandler/api";
 import { toast } from "react-toastify";
 import './viewpermission.css';
+import { NavLink } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export const Viewpermissions = () => {
   const [permissions, setPermissions] = useState([]);
@@ -85,8 +87,13 @@ export const Viewpermissions = () => {
   };
 
   return (
+    <div>
+      <Button id="admin-back-btn" variant="outlined">
+            Back
+          </Button>
     <div className="permissions-table">
-      <span id="permission" style={{fontWeight:500,fontSize:'17px'}}>View Permission :</span>
+      
+      <span id="permission" style={{fontWeight:600,fontSize:'17px'}}>View Permission :</span>
       <table>
         <thead>
           <tr>
@@ -111,6 +118,12 @@ export const Viewpermissions = () => {
           ))}
         </tbody>
       </table>
+      
+    </div>
+    <NavLink to="/main" style={{ textDecoration: "none" }}>
+      <Button variant="outlined" id="perm-back">back</Button>
+      </NavLink>
+    
     </div>
   );
 };

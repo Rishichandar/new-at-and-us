@@ -186,6 +186,8 @@ export default function Register() {
               </MenuItem>
               <MenuItem value="1">Admin</MenuItem>
               <MenuItem value="2">User</MenuItem>
+              <MenuItem value="4">Hr</MenuItem>
+              <MenuItem value="5">Team Lead</MenuItem>
               {/* <MenuItem value="3">Guest</MenuItem>
               <MenuItem value="4">HR</MenuItem>
               <MenuItem value="5">Lead</MenuItem> */}

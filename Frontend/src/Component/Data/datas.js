@@ -188,7 +188,7 @@ const Datas = () => {
     <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div className="admincon" style={{ width: "90%", height: "75%" }}>
         <div className="display back" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Box style={{ fontWeight: "500", fontSize: "20px", marginLeft: "120px" }} className="nav">
+          <Box style={{ fontWeight: "600", fontSize: "20px", marginLeft: "50%" ,}} className="nav">
             {data.RoleId === 1 ? "User Data" : "Time Logs"}
           </Box>
         </div>
@@ -321,6 +321,7 @@ const Datas = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 

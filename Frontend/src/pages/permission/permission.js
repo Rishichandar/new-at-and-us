@@ -230,6 +230,8 @@ import { toast } from "react-toastify";
 import { sendPermissionRequest } from "../../HTTPHandler/api";
 import { useNavigate } from "react-router-dom";
 import './permission.css'; // Ensure correct file extension
+import { NavLink } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export const Permission = () => {
   const [currentDate, setCurrentDate] = useState("");
@@ -367,8 +369,12 @@ export const Permission = () => {
 
   return (
     <div className="center-content">
+      <NavLink to="/main" style={{ textDecoration: "none" }}>
+      <Button variant="outlined" id="mainback">back</Button>
+      </NavLink>
+    
       <form className="bord" onSubmit={handleSubmit}>
-        <h2>Permission Request Form</h2>
+        <span id="req">Permission Request Form</span>
         <div className="form-group">
           <label htmlFor="currentDate">Current Date:<span className="required">*</span></label>
           <input
