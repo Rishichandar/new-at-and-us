@@ -7,6 +7,7 @@
     overflow: auto;
     width: 1230px;
     margin: auto; 
+    
   }
   
   /* .pending-table table {
@@ -16,11 +17,12 @@
     margin-top: 0px;
   } */
 
-  .pending-table th,
+.pending-table th,
 .pending-table td {
   padding: 10px;
   text-align: center;
   border: 1px solid rgb(114, 110, 110);
+ 
 }
 
 .pending-table th {
@@ -31,8 +33,16 @@
   top: 0; 
   z-index: 2;
 }
+.pending-table td{
+  font-size: 14px;
+  
+}
 #pend{
     position: relative;
     bottom: 0px;
+    font-weight: 600;
+    font-size: 15px;
+    
+
     
 }

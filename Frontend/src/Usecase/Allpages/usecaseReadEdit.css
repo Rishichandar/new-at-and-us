@@ -195,7 +195,7 @@
 /* for back button */
 #back-btn3 {
   position: relative;
-  top: 20px;
+  top: 50px;
   left: 1200px;
   width: 70px;
   height: 30px;
@@ -204,7 +204,7 @@
 }
 #admin-back-btn {
   position: relative;
-  top: 20px;
+  top: 70px;
   left: 1200px;
   width: 70px;
   height: 30px;
@@ -299,7 +299,7 @@
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   transition: right 0.3s ease; /* animate the right property */
-  z-index: 5;
+  z-index: 1;
 }
 
 .toggle-bar.open {
@@ -312,7 +312,7 @@
 
 #your-info1 {
   position: relative;
-  top: 100px;
+  top: 150px;
   left: 165px;
   color: rgb(21, 170, 41);
 }
@@ -396,7 +396,7 @@
 .table-container1 {
   display: flex;
   justify-content: center;
-  margin: 80px auto;
+  margin: 160px auto;
 }
 .table-container2 {
   display: flex;

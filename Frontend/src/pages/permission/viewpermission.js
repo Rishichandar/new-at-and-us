@@ -88,9 +88,7 @@ export const Viewpermissions = () => {
 
   return (
     <div>
-      <Button id="admin-back-btn" variant="outlined">
-            Back
-          </Button>
+     
     <div className="permissions-table">
       
       <span id="permission" style={{fontWeight:600,fontSize:'17px'}}>View Permission :</span>

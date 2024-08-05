@@ -273,7 +273,7 @@ import Navbar from "./Usecase/Navbar/navbar.js";
 import "./Usecase/Navbar/navbar.css";
 import "./Usecase/Sidebar/sidebar.css";
 import "./Usecase/rightdiv/right-cont.css";
-import "./Usecase/Allpages/table.css";
+// import "./Usecase/Allpages/table.css";
 // import "./Usecase/Allpages/user.css";
 import "./Usecase/Allpages/taskdetails.css";
 import { Home } from "./Usecase/Allpages/home.jsx";

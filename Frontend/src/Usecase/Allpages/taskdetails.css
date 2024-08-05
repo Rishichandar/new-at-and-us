@@ -6,7 +6,7 @@
   height: 400px; 
   position: relative;
   left: 150px;
-  top: 40px;
+  top: 100px;
 }
 #tot-form{
 position: relative;
@@ -154,7 +154,7 @@ top: -5px;
 
 #back-btn2{
   position: relative;
-  top:60px;
+  top:70px;
   left: 1180px;
   width: 70px;
   height: 30px;

@@ -394,7 +394,7 @@
 
 #your-info {
   position: relative;
-  top: 70px;
+  top: 160px;
   left: 185px;
   color: rgb(33, 33, 233);
 }
@@ -461,7 +461,7 @@
 .table-container {
   display: flex;
   justify-content: center;
-  margin: -70px auto; /* Center horizontally with auto margins */
+  margin: 10px auto; /* Center horizontally with auto margins */
 }
 
 /* Styles for the table */
@@ -522,6 +522,7 @@
   top: 0;
   z-index: 1;
   text-align: center;
+  color: white;
 }
 
 /* Styling for the "No projects added" row */

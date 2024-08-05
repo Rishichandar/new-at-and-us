@@ -213,7 +213,7 @@ const Datas = () => {
                 <select
                   value={searchEmail}
                   onChange={handleEmailChange}
-                  style={{ width: "200px", height: "30px", paddingLeft: "10px", position: 'relative', left: '180px' }}
+                  style={{ width: "200px", height: "36px", paddingLeft: "10px", position: 'relative', left: '180px' }}
                 >
                   <option value="">Select Email</option>
                   {emailList.length > 0 ? (
