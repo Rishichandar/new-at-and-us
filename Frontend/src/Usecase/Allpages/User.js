@@ -189,7 +189,7 @@ function User() {
 
   const tousecaseReadEdit = (title, email) => {
     console.log("hi", email);
-    localStorage.setItem("email", email);
+    localStorage.setItem("title", title);
     navigate("/usecaseReadEdit", { state: { title, email } });
   };
 

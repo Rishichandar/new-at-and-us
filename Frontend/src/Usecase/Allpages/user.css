@@ -433,7 +433,7 @@
 #add-button {
   position: absolute;
   left: 1170px;
-  top: 540px;
+  top: 100px;
 }
 
 #add-button:hover::after {

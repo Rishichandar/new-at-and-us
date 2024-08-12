@@ -58,7 +58,31 @@ app.use("/api/single-data",routePath);
 
 const port = process.env.PORT || 8000;
 
+// Create transporter using Gmail SMTP
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'noreply.pozent@gmail.com',
+    pass: 'wbov gqrr uyvz sfmk'
+  }
+});
+app.post('/api/send-email', (req, res) => {
+  const { from, to, subject, text } = req.body;
 
+  const mailOptions = {
+    from,
+    to,
+    subject,
+    text,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).json({ error: 'Failed to send email' });
+    }
+    res.status(200).json({ message: 'Email sent successfully' });
+  });
+});
 
 // * -------------------------- USE CASE API----------------------------
 // app.get("/landscape", (req, res) => {
@@ -174,6 +198,39 @@ app.put("/api/project_info/canceldelete/:Projectid", (req, res) => {
 //   });
 // });
 
+
+
+// app.post("/usecase", (req, res) => {
+//   const formData = req.body;
+
+//   // Extracting the date part only from formData.enddate
+//   const endDate = formData.enddate
+//     ? new Date(formData.enddate).toISOString().split("T")[0]
+//     : null;
+
+//   const sql =
+//     "INSERT INTO usecase (`summary`, `team`, `status`, `enddate`, `attachment`, `reporterid`, `description`,`title`) VALUES (?, ?, ?, ?, ?, ?,?,?)";
+//   const values = [
+//     formData.summary,
+//     formData.team,
+//     formData.status,
+//     endDate, // Using the extracted date part
+//     formData.attachment,
+//     formData.reporterid,
+//     formData.description,
+//     formData.title,
+//   ];
+
+//   db.query(sql, values, (err, result) => {
+//     if (err) {
+//       console.error("Error adding use case:", err);
+//       res.status(500).send("Failed to add use case");
+//       return;
+//     }
+//     console.log("Use case added successfully");
+//     res.status(201).send(result);
+//   });
+// });
 app.post("/project_infos", (req, res) => {
   const { Title, Assigner, Description, Team, Startdate, Deadline, Tools, Files, Emails } = req.body;
 
@@ -190,6 +247,41 @@ app.post("/project_infos", (req, res) => {
       console.log("Project details inserted successfully");
       res.status(200).json(data);
     }
+  });
+});
+
+app.post("/usecase", (req, res) => {
+  const { summary, team, status, enddate, attachment, reporterid, description, title, Emails } = req.body;
+
+  // Extract the date part from `enddate`
+  const endDate = enddate ? new Date(enddate).toISOString().split("T")[0] : null;
+
+  const sql =
+    "INSERT INTO usecase (`summary`, `team`, `status`, `enddate`, `attachment`, `reporterid`, `description`, `title`,`Assigner`) VALUES ?";
+
+  // Creating the values array by mapping over the Emails array
+  const values = Emails.map(email => [
+    summary, 
+    team, 
+    status, 
+    endDate, 
+    attachment, 
+    email,  // reporterid is now each email
+    description, 
+    title,
+    reporterid
+  ]);
+
+  // Executing the SQL query with the values array
+  db.query(sql, [values], (err, result) => {
+    if (err) {
+      console.error("Error adding use case:", err);
+      res.status(500).send("Failed to add use case");
+      return;
+    }
+
+    console.log("Use case added successfully");
+    res.status(201).send(result);
   });
 });
 
@@ -272,6 +364,24 @@ app.get("/project_infouser", (req, res) => {
 
 
 // Fetch project details for team leads
+// app.get("/project_info_for_lead", (req, res) => {
+//   const userEmail = req.query.email; // Extract email from query parameters
+//   const roleId = req.query.role_id; // Extract role_id from query parameters
+
+//   if (roleId !== '5') {
+//     return res.status(403).json({ error: "Access denied" });
+//   }
+
+//   const sql = "SELECT * FROM project_info WHERE Assigner = ? AND is_deleted = 0";
+
+//   db.query(sql, [userEmail], function (error, result) {
+//     if (error) {
+//       console.error("Error querying MySQL database:", error);
+//       return res.status(500).json({ error: "Internal app error" });
+//     }
+//     return res.json(result);
+//   });
+// });
 app.get("/project_info_for_lead", (req, res) => {
   const userEmail = req.query.email; // Extract email from query parameters
   const roleId = req.query.role_id; // Extract role_id from query parameters
@@ -280,7 +390,16 @@ app.get("/project_info_for_lead", (req, res) => {
     return res.status(403).json({ error: "Access denied" });
   }
 
-  const sql = "SELECT * FROM project_info WHERE Assigner = ? AND is_deleted = 0";
+  const sql = `
+    SELECT p1.*
+    FROM project_info p1
+    JOIN (
+      SELECT MIN(Projectid) as Projectid
+      FROM project_info
+      WHERE Assigner = ? AND is_deleted = 0
+      GROUP BY Title
+    ) p2 ON p1.Projectid = p2.Projectid
+  `;
 
   db.query(sql, [userEmail], function (error, result) {
     if (error) {
@@ -291,31 +410,57 @@ app.get("/project_info_for_lead", (req, res) => {
   });
 });
 
-app.get("/task_details/:summary", (req, res) => {
-  let Projecttitle = req.params.summary; // Use lowercase 'title'
-  let query = `SELECT * FROM taskdetails WHERE usecasetitle = ?`;
 
-  db.query(query, [Projecttitle], (err, results) => {
-    // Use lowercase 'title' here as well
+
+// app.get("/task_details/:summary", (req, res) => {
+//   let Projecttitle = req.params.summary; // Use lowercase 'title'
+//   let query = `SELECT * FROM taskdetails WHERE usecasetitle = ?`;
+
+//   db.query(query, [Projecttitle], (err, results) => {
+//     // Use lowercase 'title' here as well
+//     if (err) {
+//       console.error("Error querying MySQL database:", err);
+//       res.json({ error: "Internal app error" });
+//       return;
+//     }
+
+//     // Check if task details were found for the title
+//     if (results.length === 0) {
+//       res
+//         .status(404)
+//         .json({ Error: "No task details found for the title provided" }); // Changed to 404 status
+//       console.log(err);
+//       return;
+//     }
+
+//     // Task details found, send them in the response
+//     res.json(results);
+//   });
+// });
+app.get("/task_details", (req, res) => {
+  const { summary, email } = req.query;
+
+  // Build SQL query with AND condition
+  let query = `SELECT * FROM taskdetails WHERE usecasetitle = ? AND Email = ?`;
+
+  db.query(query, [summary, email], (err, results) => {
     if (err) {
       console.error("Error querying MySQL database:", err);
-      res.json({ error: "Internal app error" });
+      res.status(500).json({ error: "Internal app error" });
       return;
     }
 
-    // Check if task details were found for the title
     if (results.length === 0) {
       res
         .status(404)
-        .json({ Error: "No task details found for the title provided" }); // Changed to 404 status
-      console.log(err);
+        .json({ Error: "No task details found for the provided title and email" });
       return;
     }
 
-    // Task details found, send them in the response
     res.json(results);
   });
 });
+
 
 //for getting single value based on id
 app.get("/project_info/:Projectid", (req, res) => {
@@ -395,45 +540,40 @@ app.put("/api/update/:Title", (req, res) => {
   );
 });
 
-app.post("/usecase", (req, res) => {
-  const formData = req.body;
 
-  // Extracting the date part only from formData.enddate
-  const endDate = formData.enddate
-    ? new Date(formData.enddate).toISOString().split("T")[0]
-    : null;
 
-  const sql =
-    "INSERT INTO usecase (`summary`, `team`, `status`, `enddate`, `attachment`, `reporterid`, `description`,`title`) VALUES (?, ?, ?, ?, ?, ?,?,?)";
-  const values = [
-    formData.summary,
-    formData.team,
-    formData.status,
-    endDate, // Using the extracted date part
-    formData.attachment,
-    formData.reporterid,
-    formData.description,
-    formData.title,
-  ];
+// app.get("/usecases", (req, res) => {
+//   const { title } = req.query;
+//   let sql = "SELECT * FROM usecase"; // Assuming your table is named "usecases"
 
-  db.query(sql, values, (err, result) => {
-    if (err) {
-      console.error("Error adding use case:", err);
-      res.status(500).send("Failed to add use case");
-      return;
-    }
-    console.log("Use case added successfully");
-    res.status(201).send(result);
-  });
-});
+//   // If email is provided, add a WHERE clause to filter results by email
+//   if (title) {
+//     sql += ` WHERE reporterid = '${title}'`;
+//   }
 
+//   db.query(sql, (err, result) => {
+//     if (err) {
+//       res.status(500).json({ error: "Error retrieving use cases" });
+//     } else {
+//       res.status(200).json(result);
+//     }
+//   });
+// });
 app.get("/usecases", (req, res) => {
-  const { title } = req.query;
-  let sql = "SELECT * FROM usecase"; // Assuming your table is named "usecases"
+  const { email, Roleid ,title} = req.query;
+  let sql = "SELECT * FROM usecase"; // Default SQL query
 
-  // If email is provided, add a WHERE clause to filter results by email
-  if (title) {
-    sql += ` WHERE reporterid = '${title}'`;
+  // Add conditional WHERE clause based on roleid
+  if (Roleid === '5') {
+    // If roleid is 5, use Assigner column
+    if (email) {
+      sql += ` WHERE Assigner = '${email}' and title ='${title}'`;
+    }
+  } else {
+    // If roleid is not 5, use reporterid column
+    if (email) {
+      sql += ` WHERE reporterid = '${email}'`;
+    }
   }
 
   db.query(sql, (err, result) => {
@@ -444,6 +584,8 @@ app.get("/usecases", (req, res) => {
     }
   });
 });
+
+
 
 // app.get('/api/employees', (req, res) => {
 //   let sql = "SELECT Emp_Name,Email FROM emp_info"; // Include email in the query

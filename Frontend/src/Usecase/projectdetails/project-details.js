@@ -92,18 +92,18 @@ function Projectdetails() {
       target: { value },
     } = event;
     const selectedNames = typeof value === "string" ? value.split(",") : value;
-    
+
     // Update the logic to use `names` instead of `employee` for matching
     const selectedEmails = selectedNames.map(name => {
       const employee = names.find(emp => emp.name === name);
       return employee ? employee.email : "";
     });
-  
+
     setPersonName(selectedNames);
     setPersonEmail(selectedEmails);
     handleChange({ target: { name: "Team", value: selectedNames.join(",") } });
   };
-  
+
   const handleChange = (event) => {
     setInputValue({ ...inputValue, [event.target.name]: event.target.value });
   };
@@ -120,39 +120,10 @@ function Projectdetails() {
     Tools: "",
     Files: "",
   });
+console.log(inputValue.Team);
 
   const [submitted, setSubmitted] = useState(false);
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setSubmitted(true);
-  //   if (
-  //     inputValue.Title.trim() === "" ||
-  //     inputValue.Tools.trim() === "" ||
-  //     !inputValue.Startdate ||
-  //     !inputValue.Deadline
-  //   ) {
-  //     toast.error("Fill in all the required fields.");
-  //     return;
-  //   }
-  //   axios
-  //     .post("http://localhost:8000/project_infos", inputValue)
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.log(err));
-  //   toast.success("submitted successfully");
-  //   setTimeout(() => {
-  //     navigate("/user");
-  //   }, 2000);
-  //   setInputValue({
-  //     Title: "",
-  //     Email: email,
-  //     Description: "",
-  //     Team: "",
-  //     Startdate: "",
-  //     Deadline: "",
-  //     Tools: "",
-  //     Files: "",
-  //   });
-  // };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -166,13 +137,13 @@ function Projectdetails() {
       toast.error("Fill in all the required fields.");
       return;
     }
-  
+
     // Add emails to the inputValue
     const projectDetails = {
       ...inputValue,
       Emails: personEmail,  // Add the emails here
     };
-  
+
     axios
       .post("http://localhost:8000/project_infos", projectDetails)
       .then((res) => console.log(res))
@@ -221,7 +192,7 @@ function Projectdetails() {
         <div className="sidebar-content">
           <p>Project Details</p>
           <div id="left-container">
-          
+
             <div id="right-container">
               <form onSubmit={handleSubmit} id="form1">
                 <div id="form">
@@ -385,7 +356,7 @@ function Projectdetails() {
                       onBlur={handleBlur}
                       label={isFocused ? "Description *" : "Description"}
                     />
-                    
+
                     <FormControl
                       sx={{
                         m: 1,
@@ -446,9 +417,9 @@ function Projectdetails() {
                           </MenuItem>
                         ))}
                       </Select>
-            
+
                     </FormControl>
-                    
+
 
 
                   </tr>

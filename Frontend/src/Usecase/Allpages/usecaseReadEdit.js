@@ -15,23 +15,26 @@ import "./usecaseReadEdit.css";
 
 export const UsecaseReadEdit = () => {
   const location = useLocation();
-  const title = location.state?.title;
+  // const title = location.state?.title;
   // const email = location.state?.email;
   const [usecases, setUsecases] = useState([]);
   const [editModeId, setEditModeId] = useState(null);
   const [editedUsecase, setEditedUsecase] = useState({});
-  const [email, setEmail] = useState(localStorage.getItem("email") || location.state?.email || "");
+  const [title, setTitle] = useState(localStorage.getItem("title") || location.state?.title || "");
+  console.log("Title",title);
   
+  const data = useSelector((state) => state.auth.user);
+  const email =data.Email;
   const navigate = useNavigate();
   
 
    // Store email in local storage if it's available in location.state
-   useEffect(() => {
-    if (location.state?.email) {
-      localStorage.setItem("email", location.state.email);
-      setEmail(location.state.email);
-    }
-  }, [location.state]);
+  //  useEffect(() => {
+  //   if (location.state?.title) {
+  //     localStorage.setItem("title", location.state.title);
+  //     setEmail(location.state.title);
+  //   }
+  // }, [location.state]);
 
   // useEffect(() => {
   //   const fetchUsecases = async () => {
@@ -50,20 +53,42 @@ export const UsecaseReadEdit = () => {
 
   // const Email = useSelector((state) => state.auth.user.Email);
   // console.log("email id :", Email);
+  // useEffect(() => {
+  //   const fetchUsecases = async () => {
+  //     try {
+  //       if (!email) return;
+  //       const response = await axios.get(
+  //         `http://localhost:8000/usecases?title=${encodeURIComponent(email)}`
+  //       );
+  //       setUsecases(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching use cases:", error);
+  //     }
+  //   };
+  //   fetchUsecases();
+  // }, [title]);
+  const data1 = useSelector((state) => state.auth.user);
+  let Roleid = data1.RoleId;
   useEffect(() => {
     const fetchUsecases = async () => {
       try {
         if (!email) return;
+
+        // Add roleid to the query parameters
         const response = await axios.get(
-          `http://localhost:8000/usecases?title=${encodeURIComponent(email)}`
+          `http://localhost:8000/usecases`, 
+          { params: { email: email, Roleid,title } } // Passing roleid in query params
         );
+        
         setUsecases(response.data);
       } catch (error) {
         console.error("Error fetching use cases:", error);
       }
     };
+
     fetchUsecases();
-  }, [title]);
+  }, [email, Roleid]); // Added roleid as a dependency
+
 
   const handleEditClick = (id) => {
     setEditModeId(id);
@@ -79,6 +104,8 @@ export const UsecaseReadEdit = () => {
       [name]: value,
     }));
   };
+
+
 
   const handleSubmit = async () => {
     try {
@@ -129,14 +156,32 @@ export const UsecaseReadEdit = () => {
   };
 
   // for admin use case view
-  const data = useSelector((state) => state.auth.user);
-  let Roleid = data.RoleId;
+
 
   // for viewing use case task details
-  const handleTaskButtonClick = async (summary) => {
+  // const handleTaskButtonClick = async (summary) => {
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8000/task_details/${summary}`
+  //     );
+  //     if (!response.ok) {
+  //       throw new Error("Failed to fetch task data");
+  //     }
+  //     const jsonData = await response.json();
+  //     setTaskData(jsonData);
+  //     setToggleBarOpen(true);
+  //     setShowTab1(!showTab1);
+  //     setShowYourInfo(false);
+  //     setError(null);
+  //   } catch (error) {
+  //     console.log("summary:", summary);
+  //     toast.error("didn't add any task details");
+  //   }
+  // };
+  const handleTaskButtonClick = async (summary, reporterid) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/task_details/${summary}`
+        `http://localhost:8000/task_details?summary=${encodeURIComponent(summary)}&email=${encodeURIComponent(reporterid)}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch task data");
@@ -149,9 +194,10 @@ export const UsecaseReadEdit = () => {
       setError(null);
     } catch (error) {
       console.log("summary:", summary);
-      toast.error("didn't add any task details");
+      toast.error("Didn’t add any task details");
     }
   };
+  
 
   const downloadCSV = (data) => {
     const headers = [
@@ -423,7 +469,7 @@ export const UsecaseReadEdit = () => {
                     <td>
                       <span
                         className="task"
-                        onClick={() => handleTaskButtonClick(usecase.summary)}
+                        onClick={() => handleTaskButtonClick(usecase.summary,usecase.reporterid)}
                         id="taskdetails"
                         size={30}
                       >
